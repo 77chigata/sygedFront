@@ -1,0 +1,156 @@
+<div class="content">
+  <div class="container content">
+    <div class="form-box">
+      <h2 class="form-title">Ajouté un nouveau fichier</h2>
+
+      <form
+        [formGroup]="envoiForm"
+        (ngSubmit)="onSubmit()"
+        #dynamicForm="ngForm"
+      >
+        <!-- Destinataire -->
+        <div class="form-group">
+          <label class="form-label">Nom du projet</label>
+          <textarea
+            type="texte"
+            formControlName="nomProjet"
+            row="5"
+            cols="70"
+            placeholder=" Nom du projet"
+            required
+          ></textarea>
+        </div>
+        &nbsp; &nbsp;
+
+        <!-- Type de document -->
+        <div class="form-group">
+          <label class="form-label">Modèle d'envoie</label>
+          <select
+            formControlName="selectedType"
+            name="type"
+            class="form-input"
+            (change)="onTypeChange()"
+          >
+            <option value="" disabled selected>Choisir un type</option>
+            <option *ngFor="let type of types" [value]="type.value">
+              {{ type.label }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Champs dynamiques -->
+        <div *ngIf="fields.length > 0" class="file-fields">
+          <div *ngFor="let field of fields" class="file-field">
+            <label class="form-label">{{ field.label }}</label>
+            <textarea
+              id="message"
+              formControlName="message"
+              rows="5"
+              cols="70"
+              placeholder="Écris ton message ici..."
+            ></textarea>
+            <div
+              formGroupName="fichierSection"
+              *ngFor="let fichier of field.champs"
+            >
+              <label class="form-label">{{ fichier.namechamp }}</label>
+              <input
+                type="file"
+                (change)="onFileChange($event, fichier.nameF)"
+                class="file-input"
+              />
+            </div>
+
+            <!-- Affichage du fichier sélectionné pour chaque champ -->
+            <div *ngFor="let fichier of field.champs">
+              <div *ngIf="selectedFiles[fichier.nameF]" class="file-info">
+                <p class="file-info-text">
+                  Fichier sélectionné : {{ selectedFiles[fichier.nameF]?.name }}
+                </p>
+              </div>
+
+              <!-- Aperçu des fichiers -->
+              <div *ngIf="getFile(field.name) as file" class="file-preview">
+                <div *ngIf="isImage(file)">
+                  <div class="file-icon">
+                    <img
+                      src="assets/icons/image-icon.png"
+                      alt="Image"
+                      class="file-icon-img"
+                    />
+                    <button
+                      type="button"
+                      (click)="previewFile(field.name)"
+                      class="file-btn"
+                    >
+                      Voir l'aperçu
+                    </button>
+                  </div>
+                  <div *ngIf="previewImages[field.name]" class="preview-image">
+                    <img [src]="previewImages[field.name]" alt="Aperçu image" />
+                  </div>
+                </div>
+
+                <div *ngIf="isPdf(file)">
+                  <div class="file-icon">
+                    <img
+                      src="assets/icons/pdf-icon.png"
+                      alt="PDF"
+                      class="file-icon-img"
+                    />
+                    <button
+                      type="button"
+                      (click)="previewFile(field.name)"
+                      class="file-btn"
+                    >
+                      Voir l'aperçu PDF
+                    </button>
+                  </div>
+                </div>
+
+                <div *ngIf="isExcel(file)">
+                  <div class="file-icon">
+                    <img
+                      src="assets/icons/excel-icon.png"
+                      alt="Excel"
+                      class="file-icon-img"
+                    />
+                    <button
+                      type="button"
+                      (click)="previewFile(field.name)"
+                      class="file-btn"
+                    >
+                      Voir ou télécharger Excel
+                    </button>
+                  </div>
+                </div>
+
+                <div *ngIf="isWord(file)">
+                  <div class="file-icon">
+                    <img
+                      src="assets/icons/word-icon.png"
+                      alt="Word"
+                      class="file-icon-img"
+                    />
+                    <button
+                      type="button"
+                      (click)="previewFile(field.name)"
+                      class="file-btn"
+                    >
+                      Voir ou télécharger Word
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bouton Envoyer -->
+        <div class="form-actions">
+          <button type="submit"  [disabled]="envoiForm.invalid" class="submit-btn">Envoyer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

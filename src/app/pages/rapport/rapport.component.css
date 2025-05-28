@@ -1,0 +1,138 @@
+.content{
+    margin-left: 20%; 
+    margin-top: 60px; 
+    padding: 20px;
+  }
+.rapport-container {
+    
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.statut-valide {
+    color: green;
+    font-weight: bold;
+}
+
+.statut-en-attente {
+    color: orange;
+    font-weight: bold;
+}
+
+.btn-view, .btn-download, .btn-delete {
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-view {
+    background-color: #d08515;
+    color: white;
+}
+
+.btn-download {
+    background-color: #27ae60;
+    color: white;
+}
+
+.btn-view:hover {
+    background-color: #e9af5d;
+}
+
+.btn-download:hover {
+    background-color: #219150;
+}
+.btn-delete {
+
+    background-color: #cc1010;
+}
+.btn-delete:hover {
+
+    background-color: #f37979;
+}
+
+.commentaire-box {
+   
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 15px;
+}
+
+.commentaire-box textarea {
+    width: 100%;
+    height: 80px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    
+}
+
+.btn-comment {
+    background-color: hsl(211, 53%, 84%);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-comment:hover {
+    background-color: #9ccdf6;
+}
+
+.btn-send {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-send:hover {
+    background-color: #27ae60;
+}
+
+.btn-cancel {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.btn-cancel:hover {
+    background-color: #c0392b;
+}

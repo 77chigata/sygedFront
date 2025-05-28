@@ -1,0 +1,119 @@
+
+
+.header {
+    background: #f1efec;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    nav {
+      
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+      padding: 15px;
+     height: 5rem;
+     width: 80%;
+      background: rgb(238, 153, 15);
+      border-radius: 50px;
+        right: 100%;
+        left: 100%;
+  
+      ul {
+       vertical-align: center;
+        margin-left: 7rem;
+        display: flex;
+        text-align: center;
+        list-style: none;
+        display: flex;
+        gap: 15px;
+        
+  
+        li a {
+          color: rgb(7, 7, 7);
+          text-decoration: none;
+          text-align: center;
+          width: 15%;
+          padding: 15px;
+        }
+      }
+    }
+  }
+  
+  .hero {
+    text-align: center;
+    padding: 50px;
+    background: #f4f4f4;
+  
+    h2 {
+      color: #007bff;
+    }
+  }
+  
+  .features {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+    background: white;
+  
+    .feature {
+      text-align: center;
+      padding: 15px;
+      width: 30%;
+      background: #eef;
+      border-radius: 8px;
+    }
+  }
+  
+  .footer {
+    text-align: center;
+    padding: 8px;
+    background: #036c11;
+    color: white;
+    width: 100%;
+    display: inline-block;
+  }
+  .btn-login{
+    text-align: center;
+      padding: 5px;
+      width: 15%;
+      background: rgb(20, 179, 99);
+      border-radius: 90px;
+  }
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 3rem;
+    .logo {
+      width: 90px; /* Ajuste la taille du logo*/
+      height: auto;
+    }
+  }
+  .hero{ 
+    background: url('/assets/cadena.png') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    min-height: 30rem;
+    height: 100%;
+    display: flex;
+margin: 0;
+   
+
+  }
+  .icone-fixe {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+  .icone-debut {
+    margin: 0 0 0 150px;
+    display: inline-block;
+  }
+
+  .icone{
+    margin: 0 0 0 10px;
+    display: inline-block;
+  }

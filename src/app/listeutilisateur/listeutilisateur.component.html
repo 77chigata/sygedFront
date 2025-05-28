@@ -1,0 +1,49 @@
+<div class="content">
+  <div class="form-container">
+    <h2>Liste des utilisateurs</h2>
+
+    <table class="table table-bordered table-striped mt-3">
+      <thead class="table-dark">
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Contact</th>
+          <th>Rôle</th>
+          <th>Département</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let utilisateur of utilisateurs">
+          <td>{{ utilisateur.name }}</td>
+          <td>{{ utilisateur.prenom }}</td>
+          <td>{{ utilisateur.username }}</td>
+          <td>{{ utilisateur.contact }}</td>
+        <td>
+        <ul class="list-unstyled m-0 p-0">
+          <li class="lis" *ngFor="let role of utilisateur.roles">
+            {{ role.libelleRole }}
+          </li>
+        </ul>
+      </td>
+          <td>{{ utilisateur.departement?.nomDepartement}}</td>
+          <td>
+            <button
+              class="btn btn-sm btn-primary me-2"
+              (click)="modifierUtilisateur(utilisateur)"
+            >
+              Modifier
+            </button>
+            <button
+              class="btn btn-sm btn-danger"
+              (click)="supprimerUtilisateur(utilisateur.id)"
+            >
+              Supprimer
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

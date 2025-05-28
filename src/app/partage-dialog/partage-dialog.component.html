@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>✅ Partage réussi</h2>
+
+<div mat-dialog-content>
+  <p>Le document <strong>{{ data.document.nom }}</strong> a été partagé avec succès.</p>
+
+   <div class="col-md-6" >
+    <form action="" [formGroup]="partageForm"
+        (ngSubmit)="onSubmit()">
+    <label for="depatement">Partager</label>
+        <select id="departement" name="utilisateur" formControlName="idUtilisateur" required>
+          <option value="" disabled selected>Envoyé à</option>
+           <option *ngFor="let dep of data.utilisateurs" [value]="dep.idUtilisateur">{{ dep.name }} {{dep.prenom}}</option>
+        </select>
+    </form>
+       
+      </div>
+      </div>
+    
+
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Envoyer</button>
+  <button mat-button (click)="dialogRef.close()">Fermer</button>
+</div>
+

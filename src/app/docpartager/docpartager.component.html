@@ -1,0 +1,28 @@
+<div class="content form-container">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <h2>Documents partagés</h2>
+  
+    <table class="table table-bordered table-striped mt-3">
+      <thead class="table-dark">
+        <tr>
+          <th>Document</th>
+          <th>Partagé avec</th>
+          <th>Date de partage</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let partage of partages">
+          <td>
+            <i [ngClass]="getIconByType(partage.document.nom)" class="me-2"></i>
+            {{ partage.document.nom }}
+          </td>
+          <td>{{ partage.destinataire }}</td>
+          <td>{{ partage.datePartage | date: 'dd/MM/yyyy' }}</td>
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
