@@ -5,8 +5,8 @@ import { MatDialogRef } from '@angular/material/dialog';
   selector: 'app-success-dialog',
   standalone: false,
   templateUrl: './success-dialog.component.html',
-  styleUrl: './success-dialog.component.css'
+  styleUrl: './success-dialog.component.css',
 })
 export class SuccessDialogComponent {
-constructor(public dialogRef: MatDialogRef<SuccessDialogComponent>) {}
+  constructor(public dialogRef: MatDialogRef<SuccessDialogComponent>) {}
 }
