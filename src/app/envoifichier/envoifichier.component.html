@@ -49,10 +49,7 @@
               cols="70"
               placeholder="Écris ton message ici..."
             ></textarea>
-            <div
-              formGroupName="fichierSection"
-              *ngFor="let fichier of field.champs"
-            >
+            <div formGroupName="document" *ngFor="let fichier of field.champs">
               <label class="form-label">{{ fichier.namechamp }}</label>
               <input
                 type="file"
@@ -70,7 +67,12 @@
               </div>
 
               <!-- Aperçu des fichiers -->
-              <div *ngIf="getFile(field.name) as file" class="file-preview">
+            </div>
+          </div>
+        </div>
+
+        <!-- Bouton Envoyer 
+          <div *ngIf="getFile(field.name) as file" class="file-preview">
                 <div *ngIf="isImage(file)">
                   <div class="file-icon">
                     <img
@@ -142,13 +144,9 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bouton Envoyer -->
+        -->
         <div class="form-actions">
-          <button type="submit"  [disabled]="envoiForm.invalid" class="submit-btn">Envoyer</button>
+          <button type="submit" class="submit-btn">Envoyer</button>
         </div>
       </form>
     </div>

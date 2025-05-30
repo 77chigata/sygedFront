@@ -3,17 +3,22 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FormService {
- private BASE_URL = 'http://localhost:8080/';
-  constructor(private http:HttpClient) { }
+  private BASE_URL = 'http://localhost:8080/';
+  constructor(private http: HttpClient) {}
 
-saveUtilisateur(User:any) :Observable<any> {
-  return this.http.post(`${this.BASE_URL}utilisateur/create`,User,{
-  headers:this.createAuthorizationHeader()
-  })
-}
+  saveUtilisateur(User: any): Observable<any> {
+    return this.http.post(`${this.BASE_URL}utilisateur/create`, User, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+  addDocument(document: any): Observable<any> {
+    return this.http.post(`${this.BASE_URL}document/save`, document, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
 
   private createAuthorizationHeader(): HttpHeaders | undefined {
     const jwtToken = localStorage.getItem('jwt');
@@ -25,5 +30,4 @@ saveUtilisateur(User:any) :Observable<any> {
       return undefined;
     }
   }
-
 }

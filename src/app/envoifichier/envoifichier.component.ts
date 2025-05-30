@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { FormService } from '../services/form.service';
 @Component({
   selector: 'app-envoifichier',
   standalone: false,
@@ -19,8 +20,9 @@ export class EnvoifichierComponent implements OnInit {
     { value: 'rapport de stage', label: 'Rapport de stage' },
     { value: 'projet', label: 'Rapport de projet de développement' },
   ];
+  fileBytes: any;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private formService: FormService) {}
 
   ngOnInit(): void {
     this.envoiForm = this.fb.group({
@@ -28,7 +30,7 @@ export class EnvoifichierComponent implements OnInit {
 
       message: ['', Validators.required],
       selectedType: ['', Validators.required],
-      fichierSection: this.fb.group({}),
+      document: this.fb.group({}),
     });
   }
 
@@ -95,9 +97,7 @@ export class EnvoifichierComponent implements OnInit {
     this.previewImages = {};
 
     // Ajouter les FormControls dynamiquement
-    const fichierSectionGroup = this.envoiForm.get(
-      'fichierSection'
-    ) as FormGroup;
+    const fichierSectionGroup = this.envoiForm.get('document') as FormGroup;
     Object.keys(fichierSectionGroup.controls).forEach((controlName) => {
       fichierSectionGroup.removeControl(controlName);
     });
@@ -105,7 +105,11 @@ export class EnvoifichierComponent implements OnInit {
     this.fields.forEach((field) => {
       field.champs.forEach((champ) => {
         fichierSectionGroup.addControl(
-          champ.nameF,
+          'nomDocument',
+          new FormControl(null, Validators.required)
+        );
+        fichierSectionGroup.addControl(
+          'contenuFichier',
           new FormControl(null, Validators.required)
         );
       });
@@ -116,17 +120,37 @@ export class EnvoifichierComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-
-      // Met à jour l’objet local pour l'affichage/aperçu
       this.selectedFiles[champName] = file;
 
-      // Si image, préparer l’aperçu
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64String = reader.result as string;
+        const contenu = base64String.split(',')[1]; // Extraire uniquement la partie base64
 
-      // Met à jour le formControl dynamique
-      const fichierSectionGroup = this.envoiForm.get(
-        'fichierSection'
-      ) as FormGroup;
-      fichierSectionGroup.get(champName)?.setValue(file);
+        const fichierSectionGroup = this.envoiForm.get('document') as FormGroup;
+
+        // Mettre à jour le nom du fichier
+        fichierSectionGroup.get('nomDocument')?.setValue(file.name);
+        const contenuKey1 = `contenuFichier`;
+        if (!fichierSectionGroup.get(contenuKey1)) {
+          fichierSectionGroup.addControl(
+            contenuKey1,
+            new FormControl(null, Validators.required)
+          );
+        }
+        fichierSectionGroup.get(contenuKey1)?.setValue(file.name);
+        // Mettre à jour ou créer le champ dynamique pour le contenu base64
+        const contenuKey = `contenuFichier`;
+        if (!fichierSectionGroup.get(contenuKey)) {
+          fichierSectionGroup.addControl(
+            contenuKey,
+            new FormControl(null, Validators.required)
+          );
+        }
+        fichierSectionGroup.get(contenuKey)?.setValue(contenu);
+      };
+
+      reader.readAsDataURL(file);
     }
   }
 
@@ -167,111 +191,17 @@ export class EnvoifichierComponent implements OnInit {
     }
   }
 
-  async sendDocument(documentData: any, apiUrl: string): Promise<any> {
-    try {
-      // 1. Vérifier l'existence d'un jeton valide
-      let token = localStorage.getItem('jwt');
-      console.log('Token from localStorage:', token);
-
-      // 2. Si aucun jeton ou si le jeton a expiré, en obtenir un nouveau
-      if (!token || this.isTokenExpired(token)) {
-        const credentials = {
-          username: 'chigata@gmail.com',
-          password: '1234',
-        };
-
-        token = await this.getToken('http://localhost:8080/login', credentials);
-        localStorage.setItem('jwt', token);
-      }
-
-      documentData.fichierSection = this.fileToBytes(
-        documentData.fichierSection.rapport_stage
-      );
-      console.log(documentData);
-      // 3. Faire une requête authentifiée
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(documentData),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      return await response.json();
-    } catch (error) {
-      console.error('Error sending document:', error);
-      throw error; // Relancer l’erreur pour laisser l’appelant la gérer
-    }
-  }
-
-  private isTokenExpired(token: string): boolean {
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      return Date.now() >= payload.exp * 1000;
-    } catch {
-      return true; // Si la décodification échoue, supposer qu’il est expiré
-    }
-  }
-
-  async getToken(apiUrl: string, payload: object): Promise<string> {
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          // Ajouter d'autres en-têtes si nécessaire
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => null);
-        throw new Error(
-          errorData?.message || `HTTP error! status: ${response.status}`
-        );
-      }
-
-      console.log('Response data:', response);
-      const responseData = await response.json();
-      console.log('Response data:', responseData);
-
-      // Extraire le jeton à partir des différents formats de réponse possibles
-      const token =
-        responseData?.token || responseData?.access_token || responseData;
-
-      if (!token) {
-        throw new Error('No token received in response');
-      }
-
-      return token;
-    } catch (error) {
-      console.error('Error getting token:', error);
-      throw error; // Relancer l'exception pour laisser l'appelant la gérer
-    }
-  }
-
-  fileToBytes(file: File): Promise<Uint8Array> {
-    return file.arrayBuffer().then((buffer) => {
-      const bytes = new Uint8Array(buffer);
-      return bytes;
-    });
-  }
-
   onSubmit() {
-    this.sendDocument(
-      this.envoiForm.value,
-      'http://localhost:8080/document/save'
-    );
-  }
+    console.log(this.envoiForm.value);
+    this.formService.addDocument(this.envoiForm.value).subscribe(
+     (response)=>{
+    console.log(response)
 
-  getFile(fieldName: string): File | null {
-    return this.selectedFiles[fieldName] || null;
+  },(erreur)=>{
+    console.log(erreur)
+    
   }
+    )
 
-  recipient: string = '';
+  }
 }
