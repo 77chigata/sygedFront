@@ -105,12 +105,11 @@ export class EnvoifichierComponent implements OnInit {
     this.fields.forEach((field) => {
       field.champs.forEach((champ) => {
         fichierSectionGroup.addControl(
-          'nomDocument',
-          new FormControl(null, Validators.required)
-        );
-        fichierSectionGroup.addControl(
-          'contenuFichier',
-          new FormControl(null, Validators.required)
+          champ.nameF,
+          this.fb.group({
+            nomFichier: [null, Validators.required],
+            contenuFichier: [null, Validators.required],
+          })
         );
       });
     });
@@ -128,26 +127,16 @@ export class EnvoifichierComponent implements OnInit {
         const contenu = base64String.split(',')[1]; // Extraire uniquement la partie base64
 
         const fichierSectionGroup = this.envoiForm.get('document') as FormGroup;
+        const champGroup = fichierSectionGroup.get(champName) as FormGroup;
 
-        // Mettre à jour le nom du fichier
-        fichierSectionGroup.get('nomDocument')?.setValue(file.name);
-        const contenuKey1 = `contenuFichier`;
-        if (!fichierSectionGroup.get(contenuKey1)) {
-          fichierSectionGroup.addControl(
-            contenuKey1,
-            new FormControl(null, Validators.required)
+        if (champGroup) {
+          champGroup.get('nomFichier')?.setValue(file.name);
+          champGroup.get('contenuFichier')?.setValue(contenu);
+        } else {
+          console.warn(
+            `Le groupe ${champName} n'existe pas dans le formulaire`
           );
         }
-        fichierSectionGroup.get(contenuKey1)?.setValue(file.name);
-        // Mettre à jour ou créer le champ dynamique pour le contenu base64
-        const contenuKey = `contenuFichier`;
-        if (!fichierSectionGroup.get(contenuKey)) {
-          fichierSectionGroup.addControl(
-            contenuKey,
-            new FormControl(null, Validators.required)
-          );
-        }
-        fichierSectionGroup.get(contenuKey)?.setValue(contenu);
       };
 
       reader.readAsDataURL(file);
@@ -194,14 +183,12 @@ export class EnvoifichierComponent implements OnInit {
   onSubmit() {
     console.log(this.envoiForm.value);
     this.formService.addDocument(this.envoiForm.value).subscribe(
-     (response)=>{
-    console.log(response)
-
-  },(erreur)=>{
-    console.log(erreur)
-    
-  }
-    )
-
+      (response) => {
+        console.log(response);
+      },
+      (erreur) => {
+        console.log(erreur);
+      }
+    );
   }
 }
