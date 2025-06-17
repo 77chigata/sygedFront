@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 
-
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
-import { RapportComponent } from './pages/rapport/rapport.component'
+import { RapportComponent } from './pages/rapport/rapport.component';
 import { StatistiqueComponent } from './statistique/statistique.component';
 import { PageAccueilComponent } from './page-accueil/page-accueil.component';
 import { FormulaireComponent } from './formulaire/formulaire.component';
@@ -16,70 +15,74 @@ import { RepectoireComponent } from './repectoire/repectoire.component';
 import { MesdocComponent } from './mesdoc/mesdoc.component';
 import { DocpartagerComponent } from './docpartager/docpartager.component';
 const routes: Routes = [
-
- {
-  path:"admin",component:AdminComponent
-  
- },
- 
- {
-  path: "rapport", component: RapportComponent 
- },
-
   {
-    path: "statistique", component: StatistiqueComponent
+    path: 'admin',
+    component: AdminComponent,
   },
 
   {
-    path: "", component: PageAccueilComponent
+    path: 'rapport',
+    component: RapportComponent,
   },
 
   {
-    path: "formulaire", component: FormulaireComponent
-
-  },
-
-
-  { path: "formulaire/:id", component: FormulaireComponent 
-
-  }, // modification
-
-  {
-    path: "envoifichier", component: EnvoifichierComponent
-  },
-  {
-    path: "login", component: FormutilisateurComponent
+    path: 'statistique',
+    component: StatistiqueComponent,
   },
 
   {
-    path: "utilisateur", component: UtilisateurComponent
-  },
-   
-  {
-    path: "listeutilisateur", component: ListeutilisateurComponent
+    path: '',
+    component: PageAccueilComponent,
   },
 
   {
-    path: "commentaire", component: CommentaireComponent
+    path: 'formulaire',
+    component: FormulaireComponent,
+  },
+
+  { path: 'formulaire/:id', component: FormulaireComponent }, // modification
+
+  {
+    path: 'envoifichier',
+    component: EnvoifichierComponent,
+  },
+  {
+    path: 'login',
+    component: FormutilisateurComponent,
   },
 
   {
-    path: "repectoire", component: RepectoireComponent
+    path: 'utilisateur',
+    component: UtilisateurComponent,
   },
 
-{
-  path: "mesdoc",component: MesdocComponent
-},
-{
-  path: "docpartager",component: DocpartagerComponent
-}
+  {
+    path: 'listeutilisateur',
+    component: ListeutilisateurComponent,
+  },
 
+  {
+    path: 'commentaire',
+    component: CommentaireComponent,
+  },
 
+  {
+    path: 'repectoire',
+    component: RepectoireComponent,
+  },
 
+  {
+    path: 'mesdoc',
+    component: MesdocComponent,
+  },
+  {
+    path: 'docpartager',
+    component: DocpartagerComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
