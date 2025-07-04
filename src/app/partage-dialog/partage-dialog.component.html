@@ -1,4 +1,99 @@
-<h2 mat-dialog-title>✅ Partage</h2>
+<div class="overlay">
+        <div class="popup">
+            <div class="popup-header">
+                <div class="success-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h2 class="popup-title">Partage</h2>
+            </div>
+            
+            <div class="popup-content">
+                <div class="document-info">
+                    <div mat-dialog-content>
+  <p>
+    Le document <strong>{{ data.document.nomDocument }}</strong> va être partager
+  </p>
+                </div> &nbsp;
+                
+                 <div class="col-md-6">
+    <form action="" [formGroup]="partageForm" (ngSubmit)="onSubmit()">
+      
+      <div formGroupName="Destinataire">
+        <select
+          id="destinataire"
+          name="destinataire"
+          formControlName="idUtilisateur"
+          required
+        >
+          <option value="" disabled selected>Envoyer à</option>
+          <option
+            *ngFor="let user of data.utilisateurs"
+            [value]="user.id"
+          >
+            {{ user.name }} {{ user.prenom }}
+          </option>
+        </select>
+      </div>
+    </form>
+  </div>
+            </div>
+            
+           <div mat-dialog-actions>
+  <button mat-button (click)="partageDoc()">Envoyer</button>
+  <button mat-button (click)="dialogRef.close()">Fermer</button>
+</div>
+
+        </div>
+    </div>
+
+    <script>
+        function closePopup() {
+            const popup = document.querySelector('.popup');
+            popup.style.animation = 'popOut 0.2s ease-in forwards';
+            setTimeout(() => {
+                document.querySelector('.overlay').style.display = 'none';
+            }, 200);
+        }
+
+        function sendDocument() {
+            const select = document.querySelector('.form-select');
+            const selectedOption = select.options[select.selectedIndex].text;
+            
+            // Animation de chargement
+            const btn = document.querySelector('.btn-primary');
+            btn.innerHTML = '<span style="opacity: 0.7;">Envoi en cours...</span>';
+            btn.style.background = 'linear-gradient(135deg, #6b7280, #4b5563)';
+            
+            setTimeout(() => {
+                alert(`Document partagé via: ${selectedOption}`);
+                closePopup();
+            }, 1500);
+        }
+
+        // Style pour l'animation de fermeture
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes popOut {
+                from {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+                to {
+                    transform: scale(0.9);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+
+
+
+
+<!--<h2 mat-dialog-title>✅ Partage</h2>
 
 <div mat-dialog-content>
   <p>
@@ -31,4 +126,4 @@
 <div mat-dialog-actions>
   <button mat-button (click)="partageDoc()">Envoyer</button>
   <button mat-button (click)="dialogRef.close()">Fermer</button>
-</div>
+</div> -->
