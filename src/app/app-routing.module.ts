@@ -14,37 +14,48 @@ import { CommentaireComponent } from './commentaire/commentaire.component';
 import { RepectoireComponent } from './repectoire/repectoire.component';
 import { MesdocComponent } from './mesdoc/mesdoc.component';
 import { DocpartagerComponent } from './docpartager/docpartager.component';
+import { authGuard } from './guards/auth.guard';
 const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [authGuard],
   },
 
   {
     path: 'rapport',
     component: RapportComponent,
+    canActivate: [authGuard],
   },
 
   {
     path: 'statistique',
     component: StatistiqueComponent,
+    canActivate: [authGuard],
   },
 
   {
     path: '',
     component: PageAccueilComponent,
+    canActivate: [authGuard],
   },
 
   {
     path: 'formulaire',
     component: FormulaireComponent,
+    canActivate: [authGuard],
   },
 
-  { path: 'formulaire/:id', component: FormulaireComponent }, // modification
+  {
+    path: 'formulaire/:id',
+    component: FormulaireComponent,
+    canActivate: [authGuard],
+  }, // modification
 
   {
     path: 'envoifichier',
     component: EnvoifichierComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'login',
@@ -54,31 +65,38 @@ const routes: Routes = [
   {
     path: 'utilisateur',
     component: UtilisateurComponent,
+    canActivate: [authGuard],
   },
 
   {
     path: 'listeutilisateur',
     component: ListeutilisateurComponent,
+    canActivate: [authGuard],
   },
 
   {
     path: 'commentaire',
     component: CommentaireComponent,
+    canActivate: [authGuard],
   },
 
   {
     path: 'repectoire',
     component: RepectoireComponent,
+    canActivate: [authGuard],
   },
 
   {
     path: 'mesdoc',
     component: MesdocComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'docpartager',
     component: DocpartagerComponent,
+    canActivate: [authGuard],
   },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({

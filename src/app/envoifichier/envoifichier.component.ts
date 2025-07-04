@@ -6,8 +6,13 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+
 import { AuthService } from '../services/auth.service';
 import { FormService } from '../services/form.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-envoifichier',
   standalone: false,
@@ -22,7 +27,12 @@ export class EnvoifichierComponent implements OnInit {
   ];
   fileBytes: any;
 
-  constructor(private fb: FormBuilder, private formService: FormService) {}
+  constructor(
+    private fb: FormBuilder,
+    private formService: FormService,
+    private dialog: MatDialog,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.envoiForm = this.fb.group({
@@ -184,11 +194,23 @@ export class EnvoifichierComponent implements OnInit {
     console.log(this.envoiForm.value);
     this.formService.addDocument(this.envoiForm.value).subscribe(
       (response) => {
-        console.log(response);
+        this.openDailogSucces();
       },
       (erreur) => {
         console.log(erreur);
       }
     );
+  }
+
+  openDailogSucces() {
+    this.dialog
+      .open(SuccessDialogComponent, {
+        data: { message: 'Le document a été envoyé avec succès !' },
+        width: '400px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        this.router.navigate(['/mesdoc']);
+      });
   }
 }

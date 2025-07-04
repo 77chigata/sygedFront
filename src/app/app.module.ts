@@ -32,6 +32,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 import { PartageDialogComponent } from './partage-dialog/partage-dialog.component';
+import { AjoutDocComponent } from './ajout-doc/ajout-doc.component';
 
 
 
@@ -58,7 +59,8 @@ import { PartageDialogComponent } from './partage-dialog/partage-dialog.componen
     SidebarUtilisateurComponent,
     HeaderUtilisateurComponent,
     SuccessDialogComponent,
-    PartageDialogComponent
+    PartageDialogComponent,
+    AjoutDocComponent
   
   ],
   imports: [

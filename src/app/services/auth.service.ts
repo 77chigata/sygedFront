@@ -6,7 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('jwt');
+    return !!token;
+    throw new Error('Method not implemented.');
+  }
   private BASE_URL = 'http://localhost:8080/';
+  router: any;
   constructor(private http: HttpClient) {}
   login(loginRequest: any): Observable<any> {
     return this.http.post(`${this.BASE_URL}login`, loginRequest, {
@@ -25,13 +31,14 @@ export class AuthService {
   }
   getUserUtilisateur(): Observable<any> {
     const email = localStorage.getItem('userName');
-    
+
     return this.http.get<any[]>(`${this.BASE_URL}utilisateur/email/${email}`, {
       headers: this.createAuthorizationHeader(),
     });
   }
 
-  
+  logout(): void {
+    localStorage.removeItem('jwt');
+    this.router.navigate(['/login']);
+  }
 }
-
-

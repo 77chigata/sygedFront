@@ -27,6 +27,12 @@ export class DataService {
     });
   }
 
+  getDocument(): Observable<any> {
+    return this.http.get<any>(`${this.BASE_URL}document/all`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   private createAuthorizationHeader(): HttpHeaders | undefined {
     const jwtToken = localStorage.getItem('jwt');
     if (jwtToken) {

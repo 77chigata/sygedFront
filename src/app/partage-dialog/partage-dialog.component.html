@@ -2,31 +2,33 @@
 
 <div mat-dialog-content>
   <p>
-    Le document <strong>{{ data.document.nom }}</strong> va être partager
+    Le document <strong>{{ data.document.nomDocument }}</strong> va être partager
   </p>
 
   <div class="col-md-6">
     <form action="" [formGroup]="partageForm" (ngSubmit)="onSubmit()">
       <label for="depatement">Partager</label>
-      <select
-        id="departement"
-        name="utilisateur"
-        formControlName="idUtilisateur"
-        required
-      >
-        <option value="" disabled selected>Envoyé à</option>
-        <option
-          *ngFor="let dep of data.utilisateurs"
-          [value]="dep.idUtilisateur"
+      <div formGroupName="Destinataire">
+        <select
+          id="destinataire"
+          name="destinataire"
+          formControlName="idUtilisateur"
+          required
         >
-          {{ dep.name }} {{ dep.prenom }}
-        </option>
-      </select>
+          <option value="" disabled selected>Envoyer à</option>
+          <option
+            *ngFor="let user of data.utilisateurs"
+            [value]="user.id"
+          >
+            {{ user.name }} {{ user.prenom }}
+          </option>
+        </select>
+      </div>
     </form>
   </div>
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button (click)="dialogRef.close()">Envoyer</button>
+  <button mat-button (click)="partageDoc()">Envoyer</button>
   <button mat-button (click)="dialogRef.close()">Fermer</button>
 </div>

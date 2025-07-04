@@ -1,48 +1,56 @@
 <div class="content">
-    <div class="rapport-container">
-        <h2>📑 Rapports Reçus</h2>
-    
-        <!-- Barre de recherche -->
-        <input type="text" class="search-bar" placeholder="🔍 Rechercher un document...">
-    
-        <!-- Tableau des rapports -->
-        <table>
-            <thead>
-                <tr>
-                    <th>N°</th>
-                    <th>Nom du Document</th>
-                    <th>Expéditeur</th>
-                    <th>Date de Réception</th>
-                
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let doc of documents; let i = index">
-                    <td>{{ i + 1 }}</td>
-                    <td>{{ doc.nom }}</td>
-                    <td>{{ doc.expediteur }}</td>
-                    <td>{{ doc.dateReception }}</td>
-                    
-                    <td>
-                        <button class="btn-view">👁️ Voir</button>
-                        <button class="btn-download">⬇️ Télécharger</button>
-                        <button class="btn-delete" (click)="supprimerDocument(i)">🗑️ Supprimer</button>
-                        <button class="btn-comment" (click)="ouvrirCommentaire(doc)">💬 Commenter</button>
-    
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div *ngIf="documentSelectionne" class="commentaire-box">
-        <h3>💬 Ajouter un commentaire</h3>
-        <p>Document : {{ documentSelectionne.nom }}</p>
-        
-        <textarea [(ngModel)]="commentaire" placeholder="Écrivez votre commentaire ici..."></textarea>
-        <button class="btn-send" (click)="envoyerCommentaire()">📩 Envoyer</button>
-        <button class="btn-cancel" (click)="fermerCommentaire()">❌ Annuler</button>
-    </div>
+  <div class="rapport-container">
+    <h2>📑 Rapports Reçus</h2>
+
+    <!-- Barre de recherche -->
+    <input
+      type="text"
+      class="search-bar"
+      placeholder="🔍 Rechercher un document..."
+    />
+
+    <!-- Tableau des rapports -->
+    <table>
+      <thead>
+        <tr>
+          <th>Nom du projet</th>
+          <th>Details</th>
+          <th>Expéditeur</th>
+          <th>Date de Réception</th>
+
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doc of documents; let i = index">
+          <td>{{ doc.nom }}</td>
+          <td>{{ doc.nom }}</td>
+          <td>{{ doc.expediteur }}</td>
+          <td>{{ doc.dateReception }}</td>
+
+          <td>
+            <button class="btn-view"><i class="bi bi-eye"></i></button>
+
+            <button class="btn-delete" (click)="supprimerDocument(i)">
+              <i class="bi bi-trash"></i>
+            </button>
+            <button class="btn-comment" (click)="ouvrirCommentaire(doc)">
+              💬
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="documentSelectionne" class="commentaire-box">
+    <h3>💬 Ajouter un commentaire</h3>
+    <p>Document : {{ documentSelectionne.nom }}</p>
+
+    <textarea
+      [(ngModel)]="commentaire"
+      placeholder="Écrivez votre commentaire ici..."
+    ></textarea>
+    <button class="btn-send" (click)="envoyerCommentaire()">📩 Envoyer</button>
+    <button class="btn-cancel" (click)="fermerCommentaire()">❌ Annuler</button>
+  </div>
 </div>
-
-

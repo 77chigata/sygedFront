@@ -10,15 +10,15 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
   user: any;
- async ngOnInit()  {
+  async ngOnInit() {
     await this.getUserInfo();
   }
-  constructor(private authService: AuthService,private router: Router) {}
-  async getUserInfo():Promise<void> {
+  constructor(private authService: AuthService, private router: Router) {}
+  async getUserInfo(): Promise<void> {
     this.authService.getUserUtilisateur().subscribe((data) => {
       this.user = data;
-      console.log(this.user)
-
+      localStorage.setItem('user', JSON.stringify(this.user));
+      console.log(this.user);
     });
   }
   hasRole(id: number): boolean {
@@ -27,10 +27,10 @@ export class SidebarComponent implements OnInit {
   goToProfile() {
     this.router.navigate(['/envoifichier']); // remplace '/profil' par ta route cible
   }
-  
+
   logout(): void {
     // Supprimez le token ou l'information de session (localStorage, sessionStorage, etc.)
-    localStorage.removeItem('token'); // ou sessionStorage.clear();
+    localStorage.removeItem('jwt'); // ou sessionStorage.clear();
 
     // Redirection vers la page de connexion
     this.router.navigate(['/login']);

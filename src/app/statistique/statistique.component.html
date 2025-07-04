@@ -1,0 +1,25 @@
+<div class="statistique-container">
+
+  <!-- 📊 Graphique en barres (mensuel) -->
+  <div class="chart-section">
+    <h2>Statistiques Mensuelles</h2>
+    <canvas baseChart
+            [datasets]="barChartDatasets"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [type]="'bar'">
+    </canvas>
+  </div>
+
+  <!-- 🥧 Graphique circulaire (trimestriel) -->
+  <div class="chart-section">
+    <h2>Statistiques Trimestrielles</h2>
+    <canvas baseChart
+            [datasets]="pieChartDatasets"
+            [labels]="pieChartLabels"
+            [options]="pieChartOptions"
+            [type]="'pie'">
+    </canvas>
+  </div>
+
+</div>

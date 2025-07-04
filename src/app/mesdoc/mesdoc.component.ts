@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PartageDialogComponent } from '../partage-dialog/partage-dialog.component';
 import { DataService } from '../services/data.service';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-mesdoc',
@@ -17,33 +18,28 @@ export class MesdocComponent {
     id: number;
     nom: string;
     url: string;
-    dateAjout: Date;
+    dateDepot: Date;
   }) {
     throw new Error('Method not implemented.');
   }
 
   constructor(private dataService: DataService, private dialog: MatDialog) {}
 
-  documents = [
-    {
-      id: 1,
-      nom: 'Fiche_projet.pdf',
-      url: 'http://localhost:8080/documents/1/download',
-      dateAjout: new Date(),
-    },
-    {
-      id: 2,
-      nom: 'Contrat_employe.docx',
-      url: 'http://localhost:8080/documents/2/download',
-      dateAjout: new Date(),
-    },
-    {
-      id: 3,
-      nom: 'Tableau_budget.xlsx',
-      url: 'http://localhost:8080/documents/3/download',
-      dateAjout: new Date(),
-    },
-  ];
+  documents: any = [];
+  ngOnInit() {
+    this.getDocument();
+  }
+  getDocument() {
+    this.dataService.getDocument().subscribe(
+      (response: any) => {
+        this.documents = response;
+        console.log(this.documents);
+      },
+      (error: any) => {
+        console.error('Erreur lors de la récupération des documents :', error);
+      }
+    );
+  }
 
   getIconByType(nomFichier: string): string {
     const ext = nomFichier.split('.').pop()?.toLowerCase();
@@ -95,6 +91,7 @@ export class MesdocComponent {
           utilisateurs: users,
         },
       });
+      
     });
   }
 

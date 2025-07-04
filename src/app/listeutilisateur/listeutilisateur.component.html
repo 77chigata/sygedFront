@@ -28,19 +28,13 @@
         </ul>
       </td>
           <td>{{ utilisateur.departement?.nomDepartement}}</td>
-          <td>
-            <button
-              class="btn btn-sm btn-primary me-2"
-              (click)="modifierUtilisateur(utilisateur)"
-            >
-              Modifier
-            </button>
-            <button
-              class="btn btn-sm btn-danger"
-              (click)="supprimerUtilisateur(utilisateur.id)"
-            >
-              Supprimer
-            </button>
+          <td class="row">
+            <span class="col-6">
+                <button class="btn btn-sm btn-primary me-2" (click)="modifierUtilisateur(utilisateur)"> <i class="bi bi-pencil"></i> </button>
+            </span>
+            <span class="col-6">
+              <button class="btn btn-sm btn-danger" (click)="supprimerUtilisateur(utilisateur.id)" > <i class="bi bi-trash"></i> </button> 
+            </span>
           </td>
         </tr>
       </tbody>
