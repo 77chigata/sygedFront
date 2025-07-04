@@ -1,119 +1,368 @@
-
-
-.header {
-    background: #f1efec;
-    color: white;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  
-    nav {
-      
-      display: flex;
-      justify-content: space-between;
-      text-align: center;
-      padding: 15px;
-     height: 5rem;
-     width: 80%;
-      background: rgb(238, 153, 15);
-      border-radius: 50px;
-        right: 100%;
-        left: 100%;
-  
-      ul {
-       vertical-align: center;
-        margin-left: 7rem;
-        display: flex;
-        text-align: center;
-        list-style: none;
-        display: flex;
-        gap: 15px;
-        
-  
-        li a {
-          color: rgb(7, 7, 7);
-          text-decoration: none;
-          text-align: center;
-          width: 15%;
-          padding: 15px;
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-      }
-    }
-  }
-  
-  .hero {
-    text-align: center;
-    padding: 50px;
-    background: #f4f4f4;
-  
-    h2 {
-      color: #007bff;
-    }
-  }
-  
-  .features {
-    display: flex;
-    justify-content: space-around;
-    padding: 30px;
-    background: white;
-  
-    .feature {
-      text-align: center;
-      padding: 15px;
-      width: 30%;
-      background: #eef;
-      border-radius: 8px;
-    }
-  }
-  
-  .footer {
-    text-align: center;
-    padding: 8px;
-    background: #036c11;
-    color: white;
-    width: 100%;
-    display: inline-block;
-  }
-  .btn-login{
-    text-align: center;
-      padding: 5px;
-      width: 15%;
-      background: rgb(20, 179, 99);
-      border-radius: 90px;
-  }
-  .logo-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-right: 3rem;
-    .logo {
-      width: 90px; /* Ajuste la taille du logo*/
-      height: auto;
-    }
-  }
-  .hero{ 
-    background: url('/assets/cadena.png') no-repeat center center;
-    background-size: cover;
-    position: relative;
-    min-height: 30rem;
-    height: 100%;
-    display: flex;
-margin: 0;
-   
 
-  }
-  .icone-fixe {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-  }
-  .icone-debut {
-    margin: 0 0 0 150px;
-    display: inline-block;
-  }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #2d4c21 0%, #4ba27c 50%, #025101 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            padding: 20px; /* Ajout de padding pour éviter que le conteneur touche les bords */
+        }
 
-  .icone{
-    margin: 0 0 0 10px;
-    display: inline-block;
-  }
+        /* Animations de fond */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(45, 90, 61, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            animation: backgroundMove 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundMove {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            33% { transform: translateX(-20px) translateY(-10px); }
+            66% { transform: translateX(20px) translateY(10px); }
+        }
+
+        /* Particules flottantes */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(3) {
+            width: 40px;
+            height: 40px;
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Container principal - Parfaitement centré */
+        .cover-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 60px 50px;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 10;
+            animation: slideUp 1s ease-out;
+            
+            /* Centrage parfait */
+            margin: 0 auto;
+            transform: translate(0, 0); /* Reset any transform */
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Logo container */
+        .logo-container {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            position: relative;
+            animation: logoAppear 1.5s ease-out 0.5s both;
+        }
+
+        .logo-bg {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ffa726 100%);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.1); opacity: 0.2; }
+        }
+
+        .logo-icon {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff6b35 0%, #ffa726 100%);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 3;
+        }
+
+        @keyframes logoAppear {
+            from {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        /* Titre et sous-titre */
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #2d3748;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #2d5a3d 0%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleAppear 1s ease-out 1s both;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: #4a5568;
+            margin-bottom: 40px;
+            font-weight: 600;
+            animation: subtitleAppear 1s ease-out 1.2s both;
+        }
+
+        @keyframes titleAppear {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes subtitleAppear {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Description */
+        .description {
+            font-size: 18px;
+            color: #718096;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: descriptionAppear 1s ease-out 1.4s both;
+        }
+
+        @keyframes descriptionAppear {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Bouton d'action */
+        .cta-button {
+            background: linear-gradient(135deg, #2d5a3d 0%, #3d6b4d 100%);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(45, 90, 61, 0.3);
+            animation: buttonAppear 1s ease-out 1.6s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(45, 90, 61, 0.4);
+        }
+
+        @keyframes buttonAppear {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            color: #a0aec0;
+            animation: footerAppear 1s ease-out 1.8s both;
+        }
+
+        @keyframes footerAppear {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .cover-container {
+                padding: 40px 30px;
+                max-width: 100%;
+            }
+
+            .title {
+                font-size: 36px;
+            }
+
+            .subtitle {
+                font-size: 20px;
+            }
+
+            .description {
+                font-size: 16px;
+            }
+
+            .logo {
+                width: 120px;
+                height: 120px;
+            }
+
+            .logo-text {
+                font-size: 20px;
+            }
+        }
+
+        /* Ajustements pour très petits écrans */
+        @media (max-width: 480px) {
+            .cover-container {
+                padding: 30px 20px;
+            }
+
+            .title {
+                font-size: 28px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+        }
