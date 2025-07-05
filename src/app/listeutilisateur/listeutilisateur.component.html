@@ -1,43 +1,65 @@
+<!-- Template HTML (component.html) -->
 <div class="content">
   <div class="form-container">
-    <h2>Liste des utilisateurs</h2>
-
-    <table class="table table-bordered table-striped mt-3">
-      <thead class="table-dark">
-        <tr>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Email</th>
-          <th>Contact</th>
-          <th>Rôle</th>
-          <th>Département</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let utilisateur of utilisateurs">
-          <td>{{ utilisateur.name }}</td>
-          <td>{{ utilisateur.prenom }}</td>
-          <td>{{ utilisateur.username }}</td>
-          <td>{{ utilisateur.contact }}</td>
-        <td>
-        <ul class="list-unstyled m-0 p-0">
-          <li class="lis" *ngFor="let role of utilisateur.roles">
-            {{ role.libelleRole }}
-          </li>
-        </ul>
-      </td>
-          <td>{{ utilisateur.departement?.nomDepartement}}</td>
-          <td class="row">
-            <span class="col-6">
-                <button class="btn btn-sm btn-primary me-2" (click)="modifierUtilisateur(utilisateur)"> <i class="bi bi-pencil"></i> </button>
-            </span>
-            <span class="col-6">
-              <button class="btn btn-sm btn-danger" (click)="supprimerUtilisateur(utilisateur.id)" > <i class="bi bi-trash"></i> </button> 
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <h2><i class="bi bi-people-fill me-2"></i>Liste des utilisateurs</h2>
+    
+    <div class="table-container">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th><i class="bi bi-person me-2"></i>Utilisateur</th>
+              <th><i class="bi bi-envelope me-2"></i>Email</th>
+              <th><i class="bi bi-telephone me-2"></i>Contact</th>
+              <th><i class="bi bi-shield-check me-2"></i>Rôle</th>
+              <th><i class="bi bi-building me-2"></i>Département</th>
+              <th><i class="bi bi-gear me-2"></i>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let utilisateur of utilisateurs; let i = index" 
+                [style.animation-delay]="i * 150 + 'ms'">
+              <td>
+                <div class="user-info">
+                  <div class="user-avatar">
+                    {{ getInitials(utilisateur.prenom, utilisateur.name) }}
+                  </div>
+                  <div>
+                    <div class="fw-bold">{{ utilisateur.name }}</div>
+                    <div class="text-muted small">{{ utilisateur.prenom }}</div>
+                  </div>
+                </div>
+              </td>
+              <td>{{ utilisateur.username }}</td>
+              <td>{{ utilisateur.contact }}</td>
+              <td>
+                <span class="role-badge" *ngFor="let role of utilisateur.roles">
+                  {{ role.libelleRole }}
+                </span>
+              </td>
+              <td>
+                <span class="department-badge" *ngIf="utilisateur.departement">
+                  {{ utilisateur.departement.nomDepartement }}
+                </span>
+              </td>
+              <td>
+                <div class="actions-container">
+                  <button class="btn btn-primary btn-action" 
+                          (click)="modifierUtilisateur(utilisateur)"
+                          [attr.aria-label]="'Modifier ' + utilisateur.name">
+                    <i class="bi bi-pencil"></i>
+                  </button>
+                  <button class="btn btn-danger btn-action" 
+                          (click)="supprimerUtilisateur(utilisateur.id)"
+                          [attr.aria-label]="'Supprimer ' + utilisateur.name">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

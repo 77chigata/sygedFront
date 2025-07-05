@@ -1,10 +1,9 @@
-<html>
-<body>
-    <div class="dashboard-container">
+
+    <div class="dashboard-container row">
         <!-- En-tête du tableau de bord -->
         <div class="dashboard-header">
             <h1 class="dashboard-title">📊 Statistiques Documents</h1>
-            <p class="dashboard-subtitle">Tableau de bord analytique pour la gestion documentaire</p>
+            
         </div>
 
         <!-- Cartes statistiques -->
@@ -48,24 +47,10 @@
         </div>
 
         <!-- Graphique linéaire d'évolution -->
-        <div class="chart-section">
-            <h2>📈 Évolution des Documents</h2>
-            <div class="chart-container large">
-                <canvas id="lineChart"></canvas>
-            </div>
-        </div>
+    
 
         <!-- Liste des documents récents -->
-        <div class="documents-table">
-            <div class="table-header">
-                <h3 class="table-title">Documents Récents</h3>
-                <input type="text" class="search-box" placeholder="Rechercher un document..." 
-                       onkeyup="filterDocuments(this.value)">
-            </div>
-            <div class="documents-list" id="documentsList">
-                <!-- Les documents seront générés par JavaScript -->
-            </div>
-        </div>
+        
     </div>
 
     <script>
@@ -229,5 +214,3 @@
         // Lancement de l'animation au chargement
         window.addEventListener('load', animateStats);
     </script>
-</body>
-</html>

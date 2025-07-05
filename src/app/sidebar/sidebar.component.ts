@@ -18,11 +18,13 @@ export class SidebarComponent implements OnInit {
     this.authService.getUserUtilisateur().subscribe((data) => {
       this.user = data;
       localStorage.setItem('user', JSON.stringify(this.user));
-      console.log(this.user);
+     
     });
   }
   hasRole(id: number): boolean {
+    console.log(this.user?.roles?.some((role: any) => role.idRole === id))
     return this.user?.roles?.some((role: any) => role.idRole === id);
+    
   }
   goToProfile() {
     this.router.navigate(['/envoifichier']); // remplace '/profil' par ta route cible

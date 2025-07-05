@@ -24,6 +24,11 @@ export class ListeutilisateurComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
+  getInitials(prenom: string, nom: string): string {
+    const prenomInitial = prenom?.charAt(0)?.toUpperCase() || '';
+    const nomInitial = nom?.charAt(0)?.toUpperCase() || '';
+    return prenomInitial + nomInitial;
+  }
   supprimerUtilisateur(arg0: number) {
     throw new Error('Method not implemented.');
   }

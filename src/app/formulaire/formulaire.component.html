@@ -1,103 +1,101 @@
-<div class="content">
-  <div class="content form-container">
-    <h2>Ajouter un utilisateur</h2>
-  
-    <form [formGroup]="ajouteForm" (ngSubmit)="ajouterUser()">
-      <div class=" row ">
-        <div class="col-md-6 ">
-          <label for="nom">Nom</label>
-          <input
-            type="text"
+ <div class="content">
+        <div class="content form-container">
+            <h2>Ajouter un utilisateur</h2>
             
-            formControlName="name"
-            required
-          />
+            <form [formGroup]="ajouteForm" (ngSubmit)="ajouterUser()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="nom">Nom</label>
+                        <input
+                            type="text"
+                            formControlName="name"
+                            required
+                            placeholder="Entrez le nom"
+                        />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="prenom">Prénom</label>
+                        <input
+                            type="text"
+                            formControlName="prenom"
+                            required
+                            placeholder="Entrez le prénom"
+                        />
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            formControlName="username"
+                            required
+                            placeholder="exemple@email.com"
+                        />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="contact">Contact</label>
+                        <input
+                            type="contact"
+                            formControlName="contact"
+                            required
+                            placeholder="Numéro de téléphone"
+                        />
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div formArrayName="roles" class="col-md-6">
+                        <div *ngFor="let roleGroup of rolesFormArray.controls; let i = index" [formGroupName]="i">
+                            <label for="role">Rôle</label>
+                            <select id="role" formControlName="idRole" class="form-control" required>
+                                <option value="" disabled selected>Choisir un rôle</option>
+                                <option *ngFor="let r of role" [value]="r.idRole">{{ r.libelleRole }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6" formGroupName="departement">
+                        <label for="departement">Département</label>
+                        <select id="departement" name="departement" formControlName="idDepartement" required>
+                            <option value="" disabled selected>Choisir un département</option>
+                            <option *ngFor="let dep of departement" [value]="dep.idDepartement">{{ dep.nomDepartement }}</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="mdp">Mot de passe</label>
+                        <input
+                            type="mdp"
+                            id="mdp"
+                            name="mdp"
+                            formControlName="password"
+                            required
+                            placeholder="Mot de passe"
+                        />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="cmdp">Confirmer mot de passe</label>
+                        <input
+                            type="cmdp"
+                            id="cmdp"
+                            name="cmdp"
+                            formControlName="confirmPassword"
+                            required
+                            placeholder="Confirmer le mot de passe"
+                        />
+                    </div>
+                </div>
+                
+                <button type="submit">Ajouter</button>
+                
+                <p class="error" *ngIf="error">{{ error }}</p>
+                <p class="success" *ngIf="success">{{ success }}</p>
+            </form>
         </div>
-        <div class="col-md-6">
-          <label for="nom">Prénom</label>
-          <input
-            type="text"
-           
-            formControlName="prenom"
-            required
-          />
-        </div>
-        </div>
-      
-
-        <div class=" row ">
-        <div class="col-md-6">
-        <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          formControlName="username"
-          required
-        />
-      </div>
-      <div class="col-md-6">
-        <label for="contact">Contact</label>
-        <input
-          type="contact"
-          
-          formControlName="contact"
-          required
-        />
-      </div>
-      <div class=" row ">
-      <div formArrayName="roles" class="col-md-6">
-  <div *ngFor="let roleGroup of rolesFormArray.controls; let i = index" [formGroupName]="i" >
-    <label for="role">Rôle</label>
-    <select id="role" formControlName="idRole" class="form-control" required>
-      <option value="" disabled selected>Choisir un rôle</option>
-      <option *ngFor="let r of role" [value]="r.idRole">{{ r.libelleRole }}</option>
-    </select>
-  </div>
-</div>
-
-     
-
-      <div class="col-md-6" formGroupName="departement">
-        <label for="depatement">Département</label>
-        <select id="departement" name="depatement" formControlName="idDepartement" required>
-          <option value="" disabled selected>Choisir un département</option>
-           <option *ngFor="let dep of departement" [value]="dep.idDepartement">{{ dep.nomDepartement }}</option>
-        </select>
-      </div>
-      </div>
     </div>
-
-    <div class=" row ">
-      <div class="col-md-6">
-      <label for="mdp">Mot de passe</label>
-      <input
-        type="mdp"
-        id="mdp"
-        name="mpd"
-        formControlName="password"
-        required
-      />
-    </div>
-    <div class="col-md-6">
-      <label for="contact">Confirmer mot de passe</label>
-      <input
-        type="cmdp"
-        id="cmdp"
-        name="cmdp"
-        formControlName="confirmPassword"
-        required
-      />
-    </div>
-    </div>
-<button type="submit" >Ajouter</button>
-<p class="error" *ngIf="error">{{ error }}</p>
-<p class="success" *ngIf="success">{{ success }}</p>
-
-
-    </form>
-
-    
-  </div>
-  
-</div>
