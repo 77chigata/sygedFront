@@ -11,9 +11,15 @@ import { DialogRef } from '@angular/cdk/dialog';
   styleUrl: './mesdoc.component.css',
 })
 export class MesdocComponent {
+getIconClass(arg0: any) {
+throw new Error('Method not implemented.');
+}
   router: any;
   error: any;
   success: any;
+filtreNom: any;
+filtreType: any;
+documentsFiltres: any;
   allerVersPartage(_t16: {
     id: number;
     nom: string;
@@ -73,9 +79,7 @@ export class MesdocComponent {
     }
   }
 
-  voirDetails(doc: any) {
-    console.log('Voir détails du document :', doc);
-  }
+  
 
   supprimerDocument(id: number) {
     console.log('Suppression du document avec ID :', id);

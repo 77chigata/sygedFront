@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './docpartager.component.css'
 })
 export class DocpartagerComponent {
+documents: any;
+supprimerDocument(arg0: any) {
+throw new Error('Method not implemented.');
+}
 
   partages = [
     {
