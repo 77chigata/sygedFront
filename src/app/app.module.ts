@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
-
+import { MatIconModule } from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
@@ -33,6 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 import { PartageDialogComponent } from './partage-dialog/partage-dialog.component';
 import { AjoutDocComponent } from './ajout-doc/ajout-doc.component';
+import { DialogConfirComponent } from './dialog-confir/dialog-confir.component';
 
 
 
@@ -60,7 +61,9 @@ import { AjoutDocComponent } from './ajout-doc/ajout-doc.component';
     HeaderUtilisateurComponent,
     SuccessDialogComponent,
     PartageDialogComponent,
-    AjoutDocComponent
+    AjoutDocComponent,
+    DialogConfirComponent,
+    
   
   ],
   imports: [
@@ -74,6 +77,7 @@ import { AjoutDocComponent } from './ajout-doc/ajout-doc.component';
     
     MatDialogModule,
     MatButtonModule,
+    MatIconModule
 
   ],
   providers: [],

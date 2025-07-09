@@ -44,9 +44,15 @@ export class DataService {
     }
   }
 
-  saveUtilisateur(User: any, value: any): Observable<any> {
+  saveUtilisateur(User: any): Observable<any> {
     return this.http.post(`${this.BASE_URL}utilisateur/create`, User, {
       headers: this.createAuthorizationHeader(),
     });
+  }
+
+  deleteUser(idUser : number) : Observable<any>{
+    return this.http.delete(`${this.BASE_URL}utilisateur/${idUser}`,{
+      headers:this.createAuthorizationHeader(),
+    })
   }
 }

@@ -22,7 +22,7 @@ export class SidebarComponent implements OnInit {
     });
   }
   hasRole(id: number): boolean {
-    console.log(this.user?.roles?.some((role: any) => role.idRole === id))
+
     return this.user?.roles?.some((role: any) => role.idRole === id);
     
   }

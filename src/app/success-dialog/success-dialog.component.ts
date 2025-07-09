@@ -12,4 +12,8 @@ export class SuccessDialogComponent {
     public dialogRef: MatDialogRef<SuccessDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { message: string }
   ) {}
+
+  closePopup(){
+    this.dialogRef.close(); // Ferme simplement le dialog
+  }
 }

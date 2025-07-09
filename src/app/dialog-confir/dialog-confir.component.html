@@ -1,0 +1,28 @@
+ <div class="confirmation-dialog">
+      <div class="dialog-header">
+        <div class="icon-container">
+          <mat-icon>warning</mat-icon>
+        </div>
+      </div>
+
+      <div class="dialog-content">
+        <p>{{ data.message }}</p>
+      </div>
+
+      <div mat-dialog-actions class="dialog-actions">
+        <button 
+          mat-button 
+          class="cancel-btn "
+          (click)="onCancel()"
+        >
+          Non
+        </button>
+        <button 
+          mat-raised-button 
+          class="confirm-btn"
+          (click)="onConfirm()"
+        >
+          Oui
+        </button>
+      </div>
+    </div>

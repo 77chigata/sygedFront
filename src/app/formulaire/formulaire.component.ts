@@ -56,7 +56,7 @@ export class FormulaireComponent {
     private formService: FormService,
     private dataService: DataService,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.ajouteForm = this.fb.group({
@@ -87,8 +87,27 @@ export class FormulaireComponent {
     if (
       this.ajouteForm.value.password !== this.ajouteForm.value.confirmPassword
     ) {
-      this.erreur = 'Les mots de passe ne correspondent pas.';
-      return;
+      console.log(this.ajouteForm.value)
+      this.dataService.saveUtilisateur(this.ajouteForm.value).subscribe({
+        next: (response) => {
+          // Traiter la réponse ici
+         
+          this.dialog
+            .open(SuccessDialogComponent, {
+              data: { message: 'Utilisateur enregistré avec succès' },
+              width: '400px',
+            })
+            .afterClosed()
+            .subscribe((result) => {
+              this.router.navigate(['/listeutilisateur']);
+            });
+        },
+        error: (error) => {
+          // Gérer les erreurs ici
+          console.error('Erreur lors de l\'enregistrement de l\'utilisateur:', error);
+        }
+      });
+
     }
   }
 }
