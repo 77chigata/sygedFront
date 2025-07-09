@@ -1,109 +1,231 @@
-/* Conteneur principal */
-.content{
-  margin-left: 20%; 
-  margin-top: 60px; 
-  padding: 20px;
-}
-.mes-documents-container {
-    background-color: #fefefe;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    margin: 30px auto;
-    max-width: 1000px;
-  }
-  
-  /* Titre */
-  .mes-documents-container h2 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    font-weight: 600;
-    color: #2c3e50;
-  }
-  
-  /* Tableau */
-  .table-mes-docs {
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  
-  .table-mes-docs thead {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .table-mes-docs td, .table-mes-docs th {
-    vertical-align: middle;
-    padding: 12px;
-  }
-  
-  .table-mes-docs tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* Icône du fichier */
-  .file-icon {
-    font-size: 1.2rem;
-    vertical-align: middle;
-    margin-right: 6px;
-  }
-  
-  /* Boutons */
-  .btn-details {
-    background-color: #17a2b8;
-    color: white;
-    border: none;
-  }
-  
-  .btn-details:hover {
-    background-color: #138496;
-  }
-  
-  .btn-delete {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-  }
-  
-  .btn-delete:hover {
-    background-color: #c82333;
-  }
-  
-  /* Lien de téléchargement */
-  a.view-link {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  a.view-link:hover {
-    text-decoration: underline;
-  }
-  
-  /* Responsive table */
-  @media (max-width: 768px) {
-    .table-mes-docs thead {
-      display: none;
+.container {
+      padding: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
     }
-  
-    .table-mes-docs tr {
-      display: block;
-      margin-bottom: 15px;
-      background-color: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      border-radius: 8px;
-      padding: 10px;
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
     }
-  
-    .table-mes-docs td {
+
+    .filters {
       display: flex;
-      justify-content: space-between;
-      padding: 8px 10px;
-      border-bottom: 1px solid #eee;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
     }
-  
-    .table-mes-docs td:last-child {
-      border-bottom: none;
+
+    .search-input, .filter-select {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
     }
-  }
+
+    .search-input {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .filter-select {
+      min-width: 150px;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    .documents-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      font-size: 14px;
+    }
+
+    .documents-table th {
+      background-color: #f8f9fa;
+      padding: 12px 8px;
+      text-align: right;
+      border-bottom: 2px solid #dee2e6;
+      font-weight: 600;
+      color: #495057;
+      white-space: nowrap;
+    }
+
+    .documents-table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid #dee2e6;
+      vertical-align: middle;
+      text-align: right;
+    }
+
+    .documents-table tr:hover {
+      background-color: #f8f9fa;
+    }
+
+    .row-highlight {
+      background-color: #e8f5e8;
+    }
+
+    .file-icon {
+      margin-right: 8px;
+      font-size: 16px;
+    }
+
+    .file-icon.document { color: #007bff; }
+    .file-icon.image { color: #28a745; }
+    .file-icon.video { color: #dc3545; }
+    .file-icon.audio { color: #6f42c1; }
+    .file-icon.archive { color: #fd7e14; }
+
+    .extension {
+      background-color: #e9ecef;
+      padding: 2px 6px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    .btn {
+      padding: 4px 8px;
+      margin: 0 2px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 11px;
+      transition: background-color 0.3s;
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .btn-success:hover {
+      background-color: #218838;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: #545b62;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+    }
+
+    .statut-disponible {
+      color: #28a745;
+      font-weight: bold;
+      text-align: right;
+    }
+
+    .statut-verrouille {
+      color: #dc3545;
+      font-weight: bold;
+      text-align: right;
+    }
+
+    .statut-en-cours {
+      color: #ffc107;
+      font-weight: bold;
+      text-align: right;
+    }
+
+    .summary {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 4px;
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .summary p {
+      margin: 0;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .documents-table {
+        font-size: 12px;
+      }
+      
+      .btn {
+        padding: 3px 6px;
+        font-size: 10px;
+      }
+
+      .filters {
+        flex-direction: column;
+      }
+
+      .summary {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+    .btn-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  border: none;
+  background: linear-gradient(45deg, #ff9a56, #ff6b35);
+  box-shadow: 0 4px 15px rgba(255, 154, 86, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-circle:hover {
+  background: linear-gradient(45deg, #ff9a56, #ff6b35);
+  box-shadow: 0 4px 15px rgba(255, 154, 86, 0.3);
+}
+
+.btn-edit {
+  background: linear-gradient(45deg, #ff9a56, #ff6b35);
+  color: white;
+}
+
+.btn-delete {
+  background: linear-gradient(45deg, #ff9a56, #ff6b35);
+  box-shadow: 0 4px 15px rgba(255, 154, 86, 0.3);
+}
+.btn-primary {
+  background: linear-gradient(45deg, #ff9a56, #ff6b35);
+  box-shadow: 0 4px 15px rgba(255, 154, 86, 0.3);
   
 
+}
+.btn-danger {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
