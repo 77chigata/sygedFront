@@ -11,6 +11,7 @@ import { FormService } from '../services/form.service';
 import { DataService } from '../services/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
+import { ConfirmationDialogService } from '../confirmation-dialog.service';
 
 @Component({
   selector: 'app-formulaire',
@@ -21,6 +22,7 @@ import { SuccessDialogComponent } from '../success-dialog/success-dialog.compone
 export class FormulaireComponent {
   ajouteForm!: FormGroup;
   formTitle: string = 'Ajouter un utilisateur';
+  editcase: boolean = false;
   erreur: string | undefined;
   user: any;
   departement: any;
@@ -28,6 +30,8 @@ export class FormulaireComponent {
   messageSucces: any;
   error: any;
   success: any;
+  action: string = 'ajouter';
+  idUtilisateur:number | undefined;
   logout() {
     throw new Error('Method not implemented.');
   }
@@ -51,22 +55,24 @@ export class FormulaireComponent {
       this.role = data;
     });
   }
- 
- 
+
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
     private formService: FormService,
     private dataService: DataService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private confirmationDialog: ConfirmationDialogService,
+
   ) { }
-  
- passwordMatchValidator(form: FormGroup) {
-  const password = form.get('password')?.value;
-  const confirmPassword = form.get('confirmPassword')?.value;
-  return password === confirmPassword ? null : { mismatch: true };
-}
+
+  passwordMatchValidator(form: FormGroup) {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { mismatch: true };
+  }
 
 
   ngOnInit(): void {
@@ -80,32 +86,36 @@ export class FormulaireComponent {
       departement: this.fb.group({
         idDepartement: [null, Validators.required],
       }),
-      
+
       roles: this.fb.array([
         this.fb.group({
           idRole: [null, Validators.required],
         }),
       ]),
-    }, { 
+    }, {
       validator: this.passwordMatchValidator.bind(this)
-     });
+    });
 
     this.getLisDepartement();
     this.getLisRole();
-  
+    
     this.route.params.subscribe(params => {
       const userId = params['id'];
+      this.idUtilisateur = userId;
       if (userId) {
-        this.formTitle = 'Modifier l\'utilisateur'; 
+        this.editcase = true;
+        this.action="modifier";
+        this.formTitle = 'Modifier l\'utilisateur';
         this.dataService.getUtilisateurById(userId).subscribe((data) => {
-        delete data.password;
-        delete data.confirmPassword;
-        this.ajouteForm.patchValue(data);
+
+          delete data.password;
+          delete data.confirmPassword;
+          this.ajouteForm.patchValue(data);
         });
       }
     });
   }
-  
+
   get rolesFormArray(): FormArray {
     return this.ajouteForm.get('roles') as FormArray;
   }
@@ -113,28 +123,60 @@ export class FormulaireComponent {
     if (
       this.ajouteForm.value.password !== this.ajouteForm.value.confirmPassword
     ) {
-      console.log(this.ajouteForm.value)
-      this.dataService.saveUtilisateur(this.ajouteForm.value).subscribe({
-        next: (response) => {
-          // Traiter la réponse ici
-         
-          this.dialog
-            .open(SuccessDialogComponent, {
-              data: { message: 'Utilisateur enregistré avec succès' },
-              width: '400px',
-            })
-            .afterClosed()
-            .subscribe((result) => {
-              this.router.navigate(['/listeutilisateur']);
+
+    } else {
+      this.confirmationDialog.openConfirmationDialog(
+       ` Êtes-vous sûr de vouloir ${this.action}  un utilisateur ?`
+      ).subscribe(result => {
+        if (result) {
+          if (this.editcase === false) {
+            this.dataService.saveUtilisateur(this.ajouteForm.value).subscribe({
+              next: (response) => {
+                // Traiter la réponse ici
+  
+                this.dialog
+                  .open(SuccessDialogComponent, {
+                    data: { message: 'Utilisateur ajouté avec succès' },
+                    width: '400px',
+                  })
+                  .afterClosed()
+                  .subscribe((result) => {
+                    this.router.navigate(['/listeutilisateur']);
+                  });
+              },
+              error: (error) => {
+                // Gérer les erreurs ici
+                console.error('Erreur lors de l\'enregistrement de l\'utilisateur:', error);
+              }
             });
-        },
-        error: (error) => {
-          // Gérer les erreurs ici
-          console.error('Erreur lors de l\'enregistrement de l\'utilisateur:', error);
+          } else {
+            this.dataService.UpdateUtilisateur(this.ajouteForm.value, this.idUtilisateur?? 0).subscribe({
+              next: (response) => {
+                // Traiter la réponse ici
+  
+                this.dialog
+                  .open(SuccessDialogComponent, {
+                    data: { message: 'Utilisateur modifié avec succès' },
+                    width: '400px',
+                  })
+                  .afterClosed()
+                  .subscribe((result) => {
+                    this.router.navigate(['/listeutilisateur']);
+                  });
+              },
+              error: (error) => {
+                // Gérer les erreurs ici
+                console.error('Erreur lors de l\'enregistrement de l\'utilisateur:', error);
+              }
+            });
+
+          }
+          
+        } else {
+          // Utilisateur a cliqué "Non"
         }
       });
-
     }
   }
-  
+
 }

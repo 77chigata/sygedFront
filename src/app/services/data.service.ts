@@ -62,4 +62,9 @@ export class DataService {
       headers:this.createAuthorizationHeader(),
     })
   }
+  UpdateUtilisateur(user :any , id :number): Observable<any> {
+    return this.http.put(`${this.BASE_URL}utilisateur/${id}`, user,{
+      headers: this.createAuthorizationHeader(),
+    });
+  }
 }
