@@ -1,0 +1,12 @@
+<div *ngIf="!isAccueil()" class="dashboard-container">
+ 
+  <app-sidebar *ngIf="!isAccueil()"></app-sidebar>
+  <div class="main-content">
+    <app-header *ngIf="!isAccueil()"></app-header>
+     <router-outlet *ngIf="!isAccueil()"></router-outlet>
+  </div>
+</div>
+<div *ngIf="isAccueil()" >
+    <router-outlet></router-outlet>
+    
+</div>

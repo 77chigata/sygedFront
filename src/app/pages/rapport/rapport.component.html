@@ -1,0 +1,54 @@
+<div class="container">
+      <h2>Liste des Documents</h2>
+      
+      <div class="filters">
+        <input type="text" [(ngModel)]="filtreNom" placeholder="Rechercher par nom..." class="search-input">
+        <select [(ngModel)]="filtreType" class="filter-select">
+          <option value="">Tous les types</option>
+          <option value="PDF">PDF</option>
+          <option value="Word">Word</option>
+          <option value="Excel">Excel</option>
+          <option value="PowerPoint">PowerPoint</option>
+          <option value="Image">Image</option>
+        </select>
+      </div>
+      
+      <div class="table-container">
+        <table class="documents-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nom Document</th>
+              <th>Type Document</th>
+              <th>Date Dépôt</th>
+              <th>Utilisateur</th>
+              <th>Projet</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let document of documentsFiltres">
+              <td>{{ document.idDocument }}</td>
+              <td style="text-align: right;">
+                <span [class]="'file-icon ' + getIconClass(document.typeDocument?.nomType ?? '')">📄</span>
+                {{ document.nomDocument }}
+              </td>
+              <td>{{ document.typeDocument?.nomType }}</td>
+              <td>{{ document.dateDepot | date:'dd/MM/yyyy' }}</td>
+              <td>{{ document.utilisateur?.nom }}</td>
+              <td>{{ document.projet?.nomProjet }}</td>
+              <td>
+                <button (click)="ouvrirDocument(document)" class="btn btn-primary">Ouvrir</button>
+                <button (click)="telechargerDocument(document)" class="btn btn-success">Télécharger</button>
+                <button (click)="supprimerDocument(document.idDocument)" class="btn btn-danger">Supprimer</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="summary">
+        <p>Total des documents: {{ documents.length }}</p>
+        <p>Documents affichés: {{ documentsFiltres.length }}</p>
+      </div>
+    </div>

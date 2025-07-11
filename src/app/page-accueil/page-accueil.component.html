@@ -1,0 +1,55 @@
+ <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <!-- Container principal -->
+    <div class="cover-container">
+        <!-- Logo -->
+        <div class="logo-container">
+            <div class="logo">
+                <div class="logo-bg"></div>
+                <div class="logo-icon">
+                    <div class="logo-text"><img src="assets/logo syged.png" alt="" style="width: 100px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Titre principal -->
+        <h1 class="title">Bienvenue sur notre plateforme</h1>
+        
+        <!-- Sous-titre -->
+        <h2 class="subtitle"></h2>
+        
+        <!-- Description -->
+        <p class="description">
+           
+        </p>
+        
+        <!-- Bouton d'action -->
+        <button [routerLink]="'/login'" class="cta-button">Se connecter</button>
+        
+        <!-- Footer -->
+        <div class="footer">
+            © 2025 - Tous droits réservés
+        </div>
+    </div>
+<!-- Logo -->
+
+<script>
+  // Animation du bouton au clic
+  document.querySelector(".cta-button").addEventListener("click", function () {
+    this.style.transform = "scale(0.95)";
+    setTimeout(() => {
+      this.style.transform = "translateY(-3px)";
+    }, 100);
+  });
+
+  // Animation continue du logo
+  setInterval(() => {
+    const logo = document.querySelector(".logo-icon");
+    logo.style.transform = "scale(1.05)";
+    setTimeout(() => {
+      logo.style.transform = "scale(1)";
+    }, 200);
+  }, 5000);
+</script>

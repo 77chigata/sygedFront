@@ -1,0 +1,170 @@
+<div *ngIf="user && hasRole(3)" class="sidebar">
+  <!-- Header avec profil -->
+  <div class="sidebar-header">
+    <div class="profile-section">
+      <div class="profile-avatar">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+          <path
+            fill-rule="evenodd"
+            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
+          />
+        </svg>
+      </div>
+      <div class="profile-info">
+        <h2>{{ user.name }} {{ user.prenom }}</h2>
+        <div class="email">{{ user.username }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenu du sidebar -->
+  <div class="sidebar-content">
+    <div class="menu-header">
+      <h3 class="menu-title">Menu</h3>
+    </div>
+
+    <button class="primary-menu-item">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+      >
+        <path
+          d="M1 3.5A1.5 1.5 0 0 1 2.5 2h2.764c.958 0 1.76.56 2.311 1.184C7.985 3.648 8.48 4 9 4h4.5A1.5 1.5 0 0 1 15 5.5v.64c.57.265.94.876.856 1.546l-.64 5.124A2.5 2.5 0 0 1 12.733 15H3.266a2.5 2.5 0 0 1-2.481-2.19l-.64-5.124A1.5 1.5 0 0 1 1 6.14z"
+        />
+      </svg>
+      Dashboard
+    </button>
+
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a [routerLink]="'/rapport'">📄Rapport </a>
+      </li>
+      <li class="menu-item">
+        <a [routerLink]="'/statistique'">📊 Statistiques</a>
+      </li>
+
+      <li class="menu-item">
+        <a [routerLink]="'/listeutilisateur'">💬 Liste des utilisateurs</a>
+      </li>
+    </ul>
+
+    <div class="logout-section">
+      <button (click)="logout()" class="logout-btn">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"
+          />
+        </svg>
+        Déconnexion
+      </button>
+    </div>
+
+    <div class="footer">
+      <div>Copyright © SNDI 2025</div>
+      <div>Designed by SNDI</div>
+    </div>
+  </div>
+</div>
+<div *ngIf="user && (hasRole(2) || hasRole(1))" class="sidebar">
+  <!-- Header avec profil -->
+  <div class="sidebar-header">
+    <div class="profile-section">
+      <div class="profile-avatar">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+          <path
+            fill-rule="evenodd"
+            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
+          />
+        </svg>
+      </div>
+      <div class="profile-info">
+        <h2>{{ user.name }} {{ user.prenom }}</h2>
+        <div class="email">{{ user.username }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenu du sidebar -->
+  <div class="sidebar-content">
+    <div class="menu-header">
+      <h3 class="menu-title">Menu</h3>
+    </div>
+
+    <button class="primary-menu-item">Dashboard</button>
+
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a [routerLink]="'/envoifichier'">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+          >
+            <path
+              d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+            />
+            <path
+              fill-rule="evenodd"
+              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
+            />
+          </svg>
+          Ajouter un document</a
+        >
+      </li>
+      <li class="menu-item">
+        <a [routerLink]="'/mesdoc'">📄Mes Documents </a>
+      </li>
+      <li class="menu-item">
+        <a [routerLink]="'/docpartager'">📁 Documents partagés</a>
+      </li>
+      <li class="menu-item">
+        <a [routerLink]="'/commentaire'">💬 Commentaires reçus</a>
+      </li>
+    </ul>
+
+    <div class="logout-section">
+      <button (click)="logout()" class="logout-btn">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"
+          />
+        </svg>
+        Déconnexion
+      </button>
+    </div>
+
+    <div class="footer">
+      <div>Copyright © SNDI 2025</div>
+      <div>Designed by SNDI</div>
+    </div>
+  </div>
+</div>

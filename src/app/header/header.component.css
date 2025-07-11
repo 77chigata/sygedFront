@@ -1,0 +1,75 @@
+
+.navbar {
+    background-color: #097640;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    text-align: center;
+    width: 80%; 
+    margin-left: 25%; 
+    z-index: 1020;
+
+  }
+
+/* Conteneur principal */
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  /* Barre latérale */
+  
+  
+  /* Contenu principal */
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+  /* Barre de navigation */
+ 
+  /* Zone de contenu */
+  .content {
+    padding: 20px;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh; /* Prend toute la hauteur de l'écran */
+    padding: 20px;
+}
+
+.btn-deconnecter {
+    margin-top: auto; /* Pousse le bouton vers le bas */
+    background-color:  #097640;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.btn-deconnecter:hover {
+    background-color: #00cc4b;
+}
+
+.search-bar {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 800px;
+}
+  .icon{
+  margin: 0 0 0 90px;
+  display: inline-block;
+}
+
+h4{
+  margin: 0 0 0 40px;
+  display: inline-block;
+}
