@@ -11,6 +11,7 @@ import { FormService } from '../services/form.service';
 import { DataService } from '../services/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
+import { ConfirmationDialogService } from '../confirmation-dialog.service';
 
 @Component({
   selector: 'app-formulaire',
@@ -55,8 +56,9 @@ export class FormulaireComponent {
     private fb: FormBuilder,
     private formService: FormService,
     private dataService: DataService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private confirmationDialog: ConfirmationDialogService
+  ) {}
 
   ngOnInit(): void {
     this.ajouteForm = this.fb.group({
@@ -85,29 +87,40 @@ export class FormulaireComponent {
   }
   ajouterUser() {
     if (
-      this.ajouteForm.value.password !== this.ajouteForm.value.confirmPassword
+      this.ajouteForm.value.password == this.ajouteForm.value.confirmPassword
     ) {
-      console.log(this.ajouteForm.value)
-      this.dataService.saveUtilisateur(this.ajouteForm.value).subscribe({
-        next: (response) => {
-          // Traiter la réponse ici
-         
-          this.dialog
-            .open(SuccessDialogComponent, {
-              data: { message: 'Utilisateur enregistré avec succès' },
-              width: '400px',
-            })
-            .afterClosed()
-            .subscribe((result) => {
-              this.router.navigate(['/listeutilisateur']);
-            });
-        },
-        error: (error) => {
-          // Gérer les erreurs ici
-          console.error('Erreur lors de l\'enregistrement de l\'utilisateur:', error);
-        }
-      });
+      this.confirmationDialog
+        .openConfirmationDialog(
+          'Êtes-vous sûr de vouloir enregistré cet élément ?'
+        )
+        .subscribe((result) => {
+          if (result) {
+            this.dataService.saveUtilisateur(this.ajouteForm.value).subscribe({
+              next: (response) => {
+                // Traiter la réponse ici
 
+                this.dialog
+                  .open(SuccessDialogComponent, {
+                    data: { message: 'Utilisateur enregistré avec succès' },
+                    width: '400px',
+                  })
+                  .afterClosed()
+                  .subscribe((result) => {
+                    window.location.reload();
+                  });
+              },
+              error: (error) => {
+                // Gérer les erreurs ici
+                console.error(
+                  "Erreur lors de l'enregistrement de l'utilisateur:",
+                  error
+                );
+              },
+            });
+          } else {
+            // Utilisateur a cliqué "Non"
+          }
+        });
     }
   }
 }
