@@ -44,11 +44,12 @@
               </td>
               <td>
                 <div class="actions-container">
-                  <button class="btn btn-primary btn-action" 
-                          (click)="modifierUtilisateur(utilisateur)"
-                          [attr.aria-label]="'Modifier ' + utilisateur.name">
+                  <button class="btn btn-primary btn-action"
+                  (click)="modifierUtilisateur(utilisateur)"
+                  [attr.aria-label]="'Modifier ' + utilisateur.name">
                     <i class="bi bi-pencil"></i>
-                  </button>
+          </button>
+          
                   <button class="btn btn-danger btn-action" 
                           (click)="openDeleteDialog(utilisateur.id)"
                           [attr.aria-label]="'Supprimer ' + utilisateur.name">

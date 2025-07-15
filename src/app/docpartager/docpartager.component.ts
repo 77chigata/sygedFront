@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-docpartager',
@@ -6,32 +7,20 @@ import { Component } from '@angular/core';
   templateUrl: './docpartager.component.html',
   styleUrl: './docpartager.component.css'
 })
-export class DocpartagerComponent {
+export class DocpartagerComponent implements OnInit {
 documents: any;
 supprimerDocument(arg0: any) {
 throw new Error('Method not implemented.');
 }
+constructor(private dataServices:DataService){
 
-  partages = [
-    {
-      id: 1,
-      destinataire: 'chigata',
-      datePartage: new Date(),
-      document: {
-        nom: 'excel',
-        url: 'http://localhost:8080/documents/partages/1'
-      }
-    },
-    {
-      id: 2,
-      destinataire: 'chigata',
-      datePartage: new Date(),
-      document: {
-        nom: 'pdf',
-        url: 'http://localhost:8080/documents/partages/2'
-      }
-    }
-  ];
+}
+  ngOnInit(): void {
+    this.getDocPartager();
+  }
+  doucment:any=[]
+
+  partages :any=[]
   
   getIconByType(nomFichier: string): string {
     const ext = nomFichier.split('.').pop()?.toLowerCase();
@@ -51,6 +40,19 @@ throw new Error('Method not implemented.');
   
   annulerPartage(id: number) {
     console.log('Annulation du partage ID :', id);
+  }
+  getDocPartager(){
+     const userString = localStorage.getItem('user');
+    const user = userString ? JSON.parse(userString) : null;
+    this.dataServices.getDocPartager(user.id).subscribe(
+       (response) => {
+         console.log(response)
+         this.partages=response
+        },
+        (erreur) => {
+          console.log(erreur);
+        }
+    )
   }
   
 }

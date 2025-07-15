@@ -1,164 +1,32 @@
-<div class="content form-container">
-        <div class="content-wrapper">
-            <h2>
-                <i class="bi bi-chat-left-text me-2"></i>
-                Commentaires reçus
-            </h2>
-
-            <div class="table-container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th><i class="bi bi-file-earmark-text me-2"></i>Document</th>
-                            <th><i class="bi bi-chat-square-quote me-2"></i>Commentaire</th>
-                            <th><i class="bi bi-person me-2"></i>Ajouté par</th>
-                            <th><i class="bi bi-calendar3 me-2"></i>Date</th>
-                            <th><i class="bi bi-gear me-2"></i>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Exemples de données pour la démonstration -->
-                        <tr>
-                            <td>
-                                <div class="document-info">
-                                    <div class="document-name">Rapport_Mensuel_2024.pdf</div>
-                                    <a href="#" class="document-link" target="_blank">
-                                        <i class="bi bi-eye"></i>
-                                        Voir le document
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="comment-content">
-                                    Excellente analyse des données trimestrielles. Les graphiques sont très clairs et les conclusions pertinentes.
-                                </div>
-                            </td>
-                            <td>
-                                <div class="author-info">
-                                    <div class="author-avatar">JD</div>
-                                    <span>Tali</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="date-info">
-                                    <i class="bi bi-calendar-event"></i>
-                                    10/07/2025
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn-icon" onclick="supprimerCommentaire(1)" title="Supprimer">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="document-info">
-                                    <div class="document-name">Présentation_Projet.pptx</div>
-                                    <a href="#" class="document-link" target="_blank">
-                                        <i class="bi bi-eye"></i>
-                                        Voir le document
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="comment-content">
-                                    Très bonne présentation, mais il manque quelques détails sur le budget prévisionnel.
-                                </div>
-                            </td>
-                            <td>
-                                <div class="author-info">
-                                    <div class="author-avatar">MS</div>
-                                    <span>Marie</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="date-info">
-                                    <i class="bi bi-calendar-event"></i>
-                                    12/07/2025
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn-icon" onclick="supprimerCommentaire(2)" title="Supprimer">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="document-info">
-                                    <div class="document-name">Manuel_Utilisateur.docx</div>
-                                    <a href="#" class="document-link" target="_blank">
-                                        <i class="bi bi-eye"></i>
-                                        Voir le document
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="comment-content">
-                                    Documentation complète et bien structurée. Facile à suivre pour les nouveaux utilisateurs.
-                                </div>
-                            </td>
-                            <td>
-                                <div class="author-info">
-                                    <div class="author-avatar">AL</div>
-                                    <span>Antoine</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="date-info">
-                                    <i class="bi bi-calendar-event"></i>
-                                    10/07/2025
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn-icon" onclick="supprimerCommentaire(3)" title="Supprimer">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- État vide (à afficher si aucun commentaire) -->
-            <div class="empty-state" style="display: none;">
-                <i class="bi bi-chat-left-text"></i>
-                <h4>Aucun commentaire</h4>
-                <p>Il n'y a pas encore de commentaires sur vos documents.</p>
-            </div>
-        </div>
+<div class="documents-container">
+        <h2>Documents partagés</h2>
+        <table class="documents-table">
+            <thead>
+                <tr>
+                    <th>Document</th>
+                    <th>Réçu de</th>
+                    <th>Date de partage</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let partage of partages">
+                    <td>{{ partage.document.nomDocument }}</td>
+                    <td>
+                        <div class="shared-with">
+                            <div class="user-avatar">
+                                {{ partage.emetteur.name.charAt(0).toUpperCase() }}
+                            </div>
+                            <span>{{ partage.destinataire.name }}</span>
+                        </div>
+                    </td>
+                    <td>{{ partage.datePartage | date:'dd/MM/yyyy' }}</td>
+                    <td>
+                        <button class="action-btn delete-btn">
+                            🗑️
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
-    <script>
-        function supprimerCommentaire(id) {
-            if (confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')) {
-                // Ici vous pouvez ajouter votre logique de suppression
-                console.log('Suppression du commentaire avec ID:', id);
-                
-                // Animation de suppression
-                const row = event.target.closest('tr');
-                row.style.transition = 'all 0.3s ease';
-                row.style.opacity = '0';
-                row.style.transform = 'translateX(-100%)';
-                
-                setTimeout(() => {
-                    row.remove();
-                }, 300);
-            }
-        }
-
-        // Animation d'apparition au chargement
-        document.addEventListener('DOMContentLoaded', function() {
-            const rows = document.querySelectorAll('tbody tr');
-            rows.forEach((row, index) => {
-                row.style.opacity = '0';
-                row.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    row.style.transition = 'all 0.5s ease';
-                    row.style.opacity = '1';
-                    row.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        });
-    </script>

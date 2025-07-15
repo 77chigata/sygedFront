@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
   private BASE_URL = 'http://localhost:8080/';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getDepartement(): Observable<any> {
     return this.http.get(`${this.BASE_URL}departement`, {
@@ -50,15 +50,31 @@ export class DataService {
     });
   }
 
-  deleteUser(idUser : number) : Observable<any>{
-    return this.http.delete(`${this.BASE_URL}utilisateur/${idUser}`,{
-      headers:this.createAuthorizationHeader(),
+  deleteUser(idUser: number): Observable<any> {
+    return this.http.delete(`${this.BASE_URL}utilisateur/${idUser}`, {
+      headers: this.createAuthorizationHeader(),
     })
   }
 
-  partagerDoc(formDoc:any):Observable<any>{
-    return this.http.post(`${this.BASE_URL}partage/save`,formDoc, {
+  partagerDoc(formDoc: any): Observable<any> {
+    return this.http.post(`${this.BASE_URL}partage/save`, formDoc, {
       headers: this.createAuthorizationHeader(),
     });
+  }
+
+  getDocPartager(id: number): Observable<any> {
+    return this.http.get(`${this.BASE_URL}partage/findEmetteur/${id}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+  getDocRecu(id: number): Observable<any> {
+    return this.http.get(`${this.BASE_URL}partage/find/${id}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+  getUtilisateurById(id: number): Observable<any> {
+    return this.http.get(`${this.BASE_URL}utilisateur/${id}`, {
+      headers: this.createAuthorizationHeader(),
+    })
   }
 }

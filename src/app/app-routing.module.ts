@@ -47,7 +47,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'formulaire/:id',
+    path: 'formulaire-utilisateur/:id',
     component: FormulaireComponent,
     canActivate: [authGuard],
   }, // modification
@@ -75,7 +75,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'commentaire',
+    path: 'documentsRecu',
     component: CommentaireComponent,
     canActivate: [authGuard],
   },

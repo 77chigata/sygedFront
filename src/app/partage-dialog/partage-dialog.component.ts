@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { DataService } from '../services/data.service';
 import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
 import { Router } from '@angular/router';
+import { ConfirmationDialogService } from '../confirmation-dialog.service';
 
 @Component({
   selector: 'app-partage-dialog',
@@ -20,7 +21,8 @@ export class PartageDialogComponent {
     private fb: FormBuilder,
     private dataService: DataService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+     private confirmationDialog: ConfirmationDialogService
 
   ) { }
   closeDialog() {
@@ -58,7 +60,11 @@ export class PartageDialogComponent {
   onSubmit() { }
 
   partageDoc() {
-    const userString = localStorage.getItem('user');
+    this.confirmationDialog.openConfirmationDialog(
+      'Êtes-vous sûr de vouloir supprimer cet élément ?'
+    ).subscribe(result => {
+      if (result) {
+        const userString = localStorage.getItem('user');
     const user = userString ? JSON.parse(userString) : null;
     console.log('Utilisateur récupéré du localStorage:', user);
     if (user) {
@@ -72,6 +78,7 @@ export class PartageDialogComponent {
 
         (response) => {
           this.openDailogSucces();
+          this.dialogRef.close()
         },
         (erreur) => {
           console.log(erreur);
@@ -80,10 +87,16 @@ export class PartageDialogComponent {
     } else {
       alert('Utilisateur non trouvé dans le localStorage.');
     }
+      } else {
+        // Utilisateur a cliqué "Non"
+      }
+    });
+   
     console.log('Partage du document:', this.partageForm.value);
   }
 
   openDailogSucces() {
+    
     this.dialog
       .open(SuccessDialogComponent, {
         data: { message: 'Le document a été partager avec succès !' },

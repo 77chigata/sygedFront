@@ -1,7 +1,6 @@
  <div class="content">
         <div class="content form-container">
-            <h2>Ajouter un utilisateur</h2>
-            
+            <h2>{{ formTitle }}</h2>
             <form [formGroup]="ajouteForm" (ngSubmit)="ajouterUser()">
                 <div class="row">
                     <div class="col-md-6">
@@ -92,7 +91,8 @@
                     </div>
                 </div>
                 
-                <button type="submit">Ajouter</button>
+                <button type="submit" [disabled]="ajouteForm.invalid">Valider</button>
+
                 
                 <p class="error" *ngIf="error">{{ error }}</p>
                 <p class="success" *ngIf="success">{{ success }}</p>

@@ -1,91 +1,342 @@
-/* Container principal */
 .content {
-  margin-left: 20%;
-  margin-top: 60px;
-  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
+
 .container {
-  max-width: 50rem;
-  margin: 2.5rem auto;
-  padding: 1.5rem;
-  background-color: #ffffff;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+/* Boîte du formulaire */
+.form-box {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Titre du formulaire */
+.form-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3748;
+  text-align: center;
+  margin-bottom: 30px;
+  background:linear-gradient(135deg, #ff6b6b 0%, #ffa726 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Groupes de formulaire */
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
+}
+
+/* Champs de saisie */
+.form-input,
+textarea {
+  width: 100%;
+  padding: 15px 20px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  outline: none;
+  resize: vertical;
+}
+
+.form-input:focus,
+textarea:focus {
+  border-color: #f27f4e;
+  box-shadow: 0 0 0 3px rgba(234, 166, 102, 0.1);
+  transform: translateY(-2px);
+}
+
+textarea {
+  min-height: 120px;
+  font-family: inherit;
+}
+
+/* Select personnalisé */
+select.form-input {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 40px;
+  appearance: none;
+}
+
+select.form-input:focus {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23667eea' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+}
+
+/* Champs de fichier */
+.file-fields {
+  margin-top: 30px;
+}
+
+.file-field {
+  background: #f8fafc;
+  border: 2px dashed #afe3b5ad;
+  border-radius: 16px;
+  padding: 25px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.file-field:hover {
+  border-color: #f27f4e;
+  background: #f1f5f9;
+}
+
+.file-input {
+  width: 100%;
+  padding: 15px;
+  border: 2px dashed #afe3b5ad;
+  border-radius: 12px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.file-input:hover {
+  border-color: #f27f4e;
+  background: #f8fafc;
+}
+
+.file-input:focus {
+  outline: none;
+  border-color: #f27f4e;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Informations sur le fichier */
+.file-info {
+  margin-top: 15px;
+  padding: 15px;
+  background: linear-gradient(135deg, #e0f2fe 0%, #f3e5f5 100%);
+  border-radius: 12px;
+  border-left: 4px solid #f27f4e;
+}
+
+.file-info-text {
+  font-size: 0.9rem;
+  color: #374151;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Aperçu des fichiers */
+.file-preview {
+  margin-top: 15px;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.file-icon {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.file-icon-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.file-btn {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ffa726 100%);;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.file-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.preview-image {
+  margin-top: 15px;
+}
+
+.preview-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Actions du formulaire */
+.form-actions {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ffa726 100%);;
+  color: white;
+  border: none;
+  padding: 18px 50px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.submit-btn:active {
+  transform: translateY(-1px);
 }
 
 .submit-btn:disabled {
-  background-color: #ccc;
+  opacity: 0.6;
   cursor: not-allowed;
-  opacity: 0.7;
-}
-/* Titre */
-h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  transform: none;
 }
 
-/* Étiquettes */
-label {
-  display: block;
-  margin-bottom: 0.25rem;
-  font-weight: 500;
-  color: #333;
+/* Animations et transitions */
+.form-group {
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
 }
 
-/* Inputs et Select */
-input[type="file"],
-select {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  margin-top: 0.25rem;
-  font-size: 0.95rem;
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+.form-group:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Texte du fichier sélectionné */
-.text-sm {
-  font-size: 0.875rem;
-  color: #4b5563;
-  margin-top: 0.5rem;
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 10px;
+  }
+  
+  .form-box {
+    padding: 30px 20px;
+    margin: 10px;
+  }
+  
+  .form-title {
+    font-size: 2rem;
+  }
+  
+  textarea {
+    min-height: 100px;
+  }
+  
+  .submit-btn {
+    padding: 15px 40px;
+    font-size: 1rem;
+  }
 }
 
-/* Boutons d’aperçu */
-button[type="button"] {
-  margin-top: 0.5rem;
-  background: none;
-  color: #2563eb;
-  cursor: pointer;
-  padding: 0;
-  font-weight: 500;
+@media (max-width: 480px) {
+  .form-title {
+    font-size: 1.8rem;
+  }
+  
+  .form-box {
+    padding: 20px 15px;
+  }
+  
+  .file-field {
+    padding: 20px 15px;
+  }
 }
 
-button[type="button"]:hover {
-  text-decoration: underline;
+/* États de validation */
+.ng-invalid.ng-touched {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
-/* Aperçu image */
-img {
-  margin-top: 0.5rem;
-  border-radius: 0.5rem;
-  object-fit: cover;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.ng-valid.ng-touched {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
-/* Bouton d’envoi */
-button[type="submit"] {
-  margin-top: 1.5rem;
-  background-color: #2563eb;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
+/* Placeholder styling */
+::placeholder {
+  color: #9ca3af;
+  opacity: 1;
 }
 
-button[type="submit"]:hover {
-  background-color: #1d4ed8;
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #5a67d8, #6b46c1);
 }

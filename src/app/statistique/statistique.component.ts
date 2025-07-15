@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-statistique',
@@ -7,25 +8,37 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
   templateUrl: './statistique.component.html',
   styleUrl: './statistique.component.css'
 })
-export class StatistiqueComponent {
+export class StatistiqueComponent implements OnInit {
+  totalDocuments: number=0;
+utilisateursNumber:number=0;
+  constructor(private dataService: DataService){}
+  ngOnInit(): void {
+   this.getListDocument();
+   this.getListUtilisateur(
+    
+   )
+  }
+getListDocument() {
+  return this.dataService.getDocument().subscribe(
+    (reponse) => {
+      const nombreDeLignes = reponse.length;
+      console.log('Nombre de documents :', nombreDeLignes);
+      // tu peux aussi stocker la valeur dans une variable de composant si besoin
+      this.totalDocuments = nombreDeLignes;
+    },
+    (error) => {
+      console.error('Erreur lors de la récupération des documents', error);
+    }
+  );
+}
+  getListUtilisateur() {
+    return this.dataService.getUtilisateur().subscribe((data) => {
+      this.utilisateursNumber = data.length;
+     
+    });
+  }  
 
-  // 📊 Configuration du graphique en barres (par mois)
-  barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    responsive: true
-  };
 
-  barChartLabels = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'];
-
-  barChartDatasets = [
-    { data: [12, 19, 3, 5, 2, 3, 10, 15, 8, 9, 6, 7], label: 'Rapports reçus' }
-  ];
-
-  // 🥧 Configuration du graphique circulaire (par trimestre)
-  pieChartLabels = ['T1', 'T2', 'T3', 'T4'];
-  pieChartDatasets = [{ data: [30, 25, 20, 25] }];
-  pieChartOptions: ChartOptions<'pie'> = {
-    responsive: true
-  };
 }
 
 

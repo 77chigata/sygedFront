@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-commentaire',
@@ -6,44 +7,48 @@ import { Component } from '@angular/core';
   templateUrl: './commentaire.component.html',
   styleUrl: './commentaire.component.css'
 })
-export class CommentaireComponent {
+export class CommentaireComponent implements OnInit {
 supprimerCommentaire(arg0: number) {
 throw new Error('Method not implemented.');
 }
-repondreCommentaire(_t14: { id: number; contenu: string; auteur: string; date: Date; document: { id: number; nom: string; }; }) {
-throw new Error('Method not implemented.');
+constructor(private dataServices:DataService){
+
 }
-getIconByType(nomFichier: string): string {
-  const extension = nomFichier.split('.').pop()?.toLowerCase();
-  switch (extension) {
-    case 'pdf':
-      return 'bi bi-file-earmark-pdf-fill text-danger';
-    case 'doc':
-    case 'docx':
-      return 'bi bi-file-earmark-word-fill text-primary';
-    case 'xls':
-    case 'xlsx':
-      return 'bi bi-file-earmark-excel-fill text-success';
-    default:
-      return 'bi bi-file-earmark-fill text-secondary';
+  ngOnInit(): void {
+    this.getDocPartager()
   }
-}
-
-
-commentaires = [
-  {
-    id: 1,
-    contenu: 'rependre.',
-    auteur: 'Talia',
-    date: new Date(),
-    document: {
-      id: 101,
-      nom: 'Rapport_Annuel_2024.pdf',
-      url: 'http://localhost:8080/documents/101/download'  // ou un lien vers un stockage cloud
-    }
-  },
-  // autres commentaires...
-];
-
+ partages :any=[]
   
+  getIconByType(nomFichier: string): string {
+    const ext = nomFichier.split('.').pop()?.toLowerCase();
+    switch (ext) {
+      case 'pdf': return 'bi bi-file-earmark-pdf-fill text-danger';
+      case 'doc':
+      case 'docx': return 'bi bi-file-earmark-word-fill text-primary';
+      case 'xls':
+      case 'xlsx': return 'bi bi-file-earmark-excel-fill text-success';
+      default: return 'bi bi-file-earmark-fill text-secondary';
+    }
+  }
+  
+  voirDetails(partage: any) {
+    console.log('Voir détails du partage :', partage);
+  }
+  
+  annulerPartage(id: number) {
+    console.log('Annulation du partage ID :', id);
+  }
+  getDocPartager(){
+     const userString = localStorage.getItem('user');
+    const user = userString ? JSON.parse(userString) : null;
+    this.dataServices.getDocRecu(user.id).subscribe(
+       (response) => {
+         console.log(response)
+         this.partages=response
+        },
+        (erreur) => {
+          console.log(erreur);
+        }
+    )
+  }
 }

@@ -4,6 +4,7 @@ import { consumerMarkDirty } from '@angular/core/primitives/signals';
 import { MatDialog } from '@angular/material/dialog';
 import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
 import { ConfirmationDialogService } from '../confirmation-dialog.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listeutilisateur',
@@ -12,21 +13,17 @@ import { ConfirmationDialogService } from '../confirmation-dialog.service';
   styleUrl: './listeutilisateur.component.css',
 })
 export class ListeutilisateurComponent implements OnInit {
-  router: any;
-  modifierUtilisateur(_t5: {
-    id: number;
-    nom: string;
-    prenom: string;
-    email: string;
-    contact: string;
-    role: string;
-    departement: string;
-  }) {
-    this.router.navigate(['/formulaire.component.html']); // redirige vers formulaire avec ID
 
-    throw new Error('Method not implemented.');
+  modifierUtilisateur(utilisateur: any) {
+    if (utilisateur && utilisateur.id) { 
+      console.log('ID utilisateur valide :', utilisateur.id);
+      this.router.navigate(['/formulaire-utilisateur', utilisateur.id]);
+    } else {
+      console.error('ID utilisateur non défini ou invalide :', utilisateur);
+    }
   }
-
+  
+  
   getInitials(prenom: string, nom: string): string {
     const prenomInitial = prenom?.charAt(0)?.toUpperCase() || '';
     const nomInitial = nom?.charAt(0)?.toUpperCase() || '';
@@ -39,14 +36,22 @@ export class ListeutilisateurComponent implements OnInit {
     this.getListUtilisateur();
   }
   utilisateurs: any;
-  constructor(private dataService: DataService, private dialog: MatDialog, private confirmationDialog: ConfirmationDialogService) { }
+  constructor(
+    private dataService: DataService, 
+    private dialog: MatDialog, 
+    private confirmationDialog: ConfirmationDialogService,
+    private router: Router
+  ) { }
+
   getListUtilisateur() {
     return this.dataService.getUtilisateur().subscribe((data) => {
       this.utilisateurs = data;
-      console.log(this.utilisateurs);
+      console.log('Données des utilisateurs :', this.utilisateurs);
     });
-  }
+  }  
 
+
+  
   deleteuser(id: number) {
     this.openDeleteDialog(id)
   }
