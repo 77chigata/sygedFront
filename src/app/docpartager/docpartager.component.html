@@ -1,95 +1,85 @@
-<div class="documents-container"> &nbsp;
+<div class="content form-container">
+        <div class="content-wrapper">
+            <h2>
+                <i class="bi bi-chat-left-text me-2"></i>
+                Documents partagés
+            </h2>
 
-    <h2>Documents partagés</h2>
-  &nbsp;
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><i class="bi bi-file-earmark-text me-2"></i>Document</th>
+                           
+                            <th><i class="bi bi-person me-2"></i>Destinataire</th>
+                            <th><i class="bi bi-calendar3 me-2"></i>Date</th>
+                            <th><i class="bi bi-gear me-2"></i>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Exemples de données pour la démonstration -->
+                        <tr>
+                            <td>
+                                <div class="document-info">
+                                    <div class="document-name">Rapport_Mensuel_2024.pdf</div>
+                                    
+                                </div>
+                            </td>
+                           
+                            <td>
+                                <div class="author-info">
+                                    <div class="author-avatar">T</div>
+                                    <span>Tali</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="date-info">
+                                    <i class="bi bi-calendar-event"></i>
+                                    10/07/2025
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn-icon" onclick="supprimerCommentaire(1)" title="Supprimer">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
 
-  <div class="documents-table">
-    <div class="table-header">
-      <div>Document</div>
-      <div>Partagé avec</div>
-      <div>Date de partage</div>
-    </div>
+           
 
-    <div class="document-row">
-      <div class="document-name">
-        
-        <span>GED</span>
-      </div>
-      <div class="shared-with">
-        <div class="user-avatar">C</div>
-        <span>chigata</span>
-      </div>
-      <div class="share-date">
-        05/07/2025
-        <div class="document-actions">
-          <button class="action-btn delete-btn">🗑️</button>
-        </div>
-      </div>
-    </div>
+    <script>
+        function supprimerCommentaire(id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')) {
+                // Ici vous pouvez ajouter votre logique de suppression
+                console.log('Suppression du commentaire avec ID:', id);
+                
+                // Animation de suppression
+                const row = event.target.closest('tr');
+                row.style.transition = 'all 0.3s ease';
+                row.style.opacity = '0';
+                row.style.transform = 'translateX(-100%)';
+                
+                setTimeout(() => {
+                    row.remove();
+                }, 300);
+            }
+        }
 
-    <div class="document-row">
-      <div class="document-name">
-        
-        <span>mémoire</span>
-      </div>
-      <div class="shared-with">
-        <div class="user-avatar">C</div>
-        <span>chigata</span>
-      </div>
-      <div class="share-date">
-        05/07/2025
-        <div class="document-actions">
-          <button class="action-btn delete-btn">🗑️</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  // Animation d'entrée
-  document.addEventListener("DOMContentLoaded", function () {
-    const table = document.querySelector(".documents-table");
-    const rows = document.querySelectorAll(".document-row");
-
-    // Animation du tableau
-    table.style.opacity = "0";
-    table.style.transform = "translateY(30px)";
-
-    setTimeout(() => {
-      table.style.transition = "all 0.8s ease";
-      table.style.opacity = "1";
-      table.style.transform = "translateY(0)";
-    }, 200);
-
-    // Animation des lignes
-    rows.forEach((row, index) => {
-      row.style.opacity = "0";
-      row.style.transform = "translateX(-20px)";
-      setTimeout(() => {
-        row.style.transition = "all 0.6s ease";
-        row.style.opacity = "1";
-        row.style.transform = "translateX(0)";
-      }, 400 + index * 150);
-    });
-  });
-
-  // Interactions
-  document.querySelectorAll(".document-row").forEach((row) => {
-    row.addEventListener("click", function (e) {
-      if (!e.target.classList.contains("action-btn")) {
-        console.log(
-          "Document sélectionné:",
-          this.querySelector(".document-name span").textContent
-        );
-      }
-    });
-  });
-
-  document.querySelectorAll(".delete-btn").forEach((btn) => {
-    btn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      console.log("Supprimer le document");
-    });
-  });
-</script>
+        // Animation d'apparition au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach((row, index) => {
+                row.style.opacity = '0';
+                row.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    row.style.transition = 'all 0.5s ease';
+                    row.style.opacity = '1';
+                    row.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>

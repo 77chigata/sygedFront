@@ -2,7 +2,7 @@
         <div class="content-wrapper">
             <h2>
                 <i class="bi bi-chat-left-text me-2"></i>
-                Commentaires reçus
+                Document reçus
             </h2>
 
             <div class="table-container">
@@ -10,8 +10,8 @@
                     <thead>
                         <tr>
                             <th><i class="bi bi-file-earmark-text me-2"></i>Document</th>
-                            <th><i class="bi bi-chat-square-quote me-2"></i>Commentaire</th>
-                            <th><i class="bi bi-person me-2"></i>Ajouté par</th>
+                           
+                            <th><i class="bi bi-person me-2"></i>Expediteur</th>
                             <th><i class="bi bi-calendar3 me-2"></i>Date</th>
                             <th><i class="bi bi-gear me-2"></i>Actions</th>
                         </tr>
@@ -28,14 +28,10 @@
                                     </a>
                                 </div>
                             </td>
-                            <td>
-                                <div class="comment-content">
-                                    Excellente analyse des données trimestrielles. Les graphiques sont très clairs et les conclusions pertinentes.
-                                </div>
-                            </td>
+                           
                             <td>
                                 <div class="author-info">
-                                    <div class="author-avatar">JD</div>
+                                    <div class="author-avatar">T</div>
                                     <span>Tali</span>
                                 </div>
                             </td>
@@ -51,84 +47,12 @@
                                 </button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <div class="document-info">
-                                    <div class="document-name">Présentation_Projet.pptx</div>
-                                    <a href="#" class="document-link" target="_blank">
-                                        <i class="bi bi-eye"></i>
-                                        Voir le document
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="comment-content">
-                                    Très bonne présentation, mais il manque quelques détails sur le budget prévisionnel.
-                                </div>
-                            </td>
-                            <td>
-                                <div class="author-info">
-                                    <div class="author-avatar">MS</div>
-                                    <span>Marie</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="date-info">
-                                    <i class="bi bi-calendar-event"></i>
-                                    12/07/2025
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn-icon" onclick="supprimerCommentaire(2)" title="Supprimer">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="document-info">
-                                    <div class="document-name">Manuel_Utilisateur.docx</div>
-                                    <a href="#" class="document-link" target="_blank">
-                                        <i class="bi bi-eye"></i>
-                                        Voir le document
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="comment-content">
-                                    Documentation complète et bien structurée. Facile à suivre pour les nouveaux utilisateurs.
-                                </div>
-                            </td>
-                            <td>
-                                <div class="author-info">
-                                    <div class="author-avatar">AL</div>
-                                    <span>Antoine</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="date-info">
-                                    <i class="bi bi-calendar-event"></i>
-                                    10/07/2025
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn-icon" onclick="supprimerCommentaire(3)" title="Supprimer">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>
 
-            <!-- État vide (à afficher si aucun commentaire) -->
-            <div class="empty-state" style="display: none;">
-                <i class="bi bi-chat-left-text"></i>
-                <h4>Aucun commentaire</h4>
-                <p>Il n'y a pas encore de commentaires sur vos documents.</p>
-            </div>
-        </div>
-    </div>
+           
 
     <script>
         function supprimerCommentaire(id) {

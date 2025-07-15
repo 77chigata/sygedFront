@@ -43,7 +43,6 @@ import { DialogConfirComponent } from './dialog-confir/dialog-confir.component';
     AppComponent,
     AdminComponent,
     RapportComponent,
-    StatistiqueComponent,
     PageAccueilComponent,
 
     FormulaireComponent,
@@ -74,11 +73,10 @@ import { DialogConfirComponent } from './dialog-confir/dialog-confir.component';
     ReactiveFormsModule,
     FormsModule,
     BaseChartDirective,
-    
+    BaseChartDirective,
     MatDialogModule,
     MatButtonModule,
     MatIconModule
-
   ],
   providers: [],
   bootstrap: [AppComponent],
