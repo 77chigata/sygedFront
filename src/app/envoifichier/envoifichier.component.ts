@@ -20,11 +20,12 @@ import { Router } from '@angular/router';
   styleUrl: './envoifichier.component.css',
 })
 export class EnvoifichierComponent implements OnInit {
-  envoiForm!: FormGroup;
+    envoiForm!: FormGroup;
   types = [
     { value: 'rapport de stage', label: 'Rapport de stage' },
     { value: 'projet', label: 'Rapport de projet de développement' },
   ];
+   idUtilisateur: number | null = null;
   fileBytes: any;
 
   constructor(
@@ -35,13 +36,32 @@ export class EnvoifichierComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.recupererIdUtilisateur()
     this.envoiForm = this.fb.group({
       nomProjet: ['', Validators.required],
-
+      utilisateur:this.fb.group({
+        idUtilisateur:this.idUtilisateur
+      }),
       message: ['', Validators.required],
       selectedType: ['', Validators.required],
       document: this.fb.group({}),
     });
+  }
+  recupererIdUtilisateur() {
+    try {
+      // Récupérer l'objet user depuis localStorage
+      const userJson = localStorage.getItem('user');
+      
+      if (userJson) {
+        const user = JSON.parse(userJson);
+        this.idUtilisateur = user.id;
+        console.log('ID Utilisateur:', this.idUtilisateur);
+      } else {
+        console.log('Aucun utilisateur trouvé dans localStorage');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la récupération de l\'ID utilisateur:', error);
+    }
   }
 
   nameFichier: string = '';

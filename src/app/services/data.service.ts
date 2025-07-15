@@ -55,4 +55,10 @@ export class DataService {
       headers:this.createAuthorizationHeader(),
     })
   }
+
+  partagerDoc(formDoc:any):Observable<any>{
+    return this.http.post(`${this.BASE_URL}partage/save`,formDoc, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
 }
