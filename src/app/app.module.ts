@@ -34,6 +34,7 @@ import { SuccessDialogComponent } from './success-dialog/success-dialog.componen
 import { PartageDialogComponent } from './partage-dialog/partage-dialog.component';
 import { AjoutDocComponent } from './ajout-doc/ajout-doc.component';
 import { DialogConfirComponent } from './dialog-confir/dialog-confir.component';
+import { EchecDialogComponent } from './echec-dialog/echec-dialog.component';
 
 
 
@@ -63,6 +64,7 @@ import { DialogConfirComponent } from './dialog-confir/dialog-confir.component';
     PartageDialogComponent,
     AjoutDocComponent,
     DialogConfirComponent,
+    EchecDialogComponent,
     
   
   ],

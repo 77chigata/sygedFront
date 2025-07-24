@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { Dialog } from '@angular/cdk/dialog';
+import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
+import { EchecDialogComponent } from '../echec-dialog/echec-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-formutilisateur',
@@ -13,7 +17,7 @@ utilisateur: any;
 
 error=''
 loginForm!:FormGroup;
-constructor(private router:Router,private fb :FormBuilder,private authservie:AuthService){
+constructor(private router:Router,private fb :FormBuilder,private authservie:AuthService ,private dialog: MatDialog){
 
 }
 
@@ -39,8 +43,17 @@ this.authservie.login(this.loginForm.value).subscribe(
   },(erreur)=>{
     console.log(erreur)
     this.error="mot de passe ou login incorect"
+    this.openDailogSucces()
   }
 )
 }
-
+ openDailogSucces() {
+    
+    this.dialog
+      .open(EchecDialogComponent, {
+        data: { message: "Le mot de passe ou le nom d'utilisateur est incorrect" },
+        width: '400px',
+      })
+      
+  }
 }

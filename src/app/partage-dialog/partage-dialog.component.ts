@@ -61,7 +61,7 @@ export class PartageDialogComponent {
 
   partageDoc() {
     this.confirmationDialog.openConfirmationDialog(
-      'Êtes-vous sûr de vouloir supprimer cet élément ?'
+      'Êtes-vous sûr de vouloir partager cet élément ?'
     ).subscribe(result => {
       if (result) {
         const userString = localStorage.getItem('user');

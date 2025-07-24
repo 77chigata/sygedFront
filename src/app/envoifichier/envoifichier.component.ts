@@ -225,7 +225,7 @@ export class EnvoifichierComponent implements OnInit {
   openDailogSucces() {
     this.dialog
       .open(SuccessDialogComponent, {
-        data: { message: 'Le document a été envoyé avec succès !' },
+        data: { message: 'Le document a été ajouté avec succès !' },
         width: '400px',
       })
       .afterClosed()

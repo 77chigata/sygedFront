@@ -1,5 +1,5 @@
 <div class="documents-container">
-        <h2>Documents partagés</h2>
+        <h2>Documents reçus</h2>
         <table class="documents-table">
             <thead>
                 <tr>
@@ -17,7 +17,7 @@
                             <div class="user-avatar">
                                 {{ partage.emetteur.name.charAt(0).toUpperCase() }}
                             </div>
-                            <span>{{ partage.destinataire.name }}</span>
+                            <span>{{ partage.emetteur.name }}</span>
                         </div>
                     </td>
                     <td>{{ partage.datePartage | date:'dd/MM/yyyy' }}</td>
